@@ -22,7 +22,7 @@ export const graphql = outdent;
 
 export const basicKeystoneConfig = js`
                                      import { config, list } from "@k6js/ks-next";
-                                     import { text } from "@keystone-next/keystone/fields";
+                                     import { text } from "@k6js/ks-next/fields";
 
                                      export default config({
                                        db: { provider: "sqlite", url: "file:./app.db" },

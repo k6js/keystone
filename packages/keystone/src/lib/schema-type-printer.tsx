@@ -82,8 +82,8 @@ export function printGeneratedTypes(
     String: 'string',
     Int: 'number',
     Float: 'number',
-    JSON: 'import("@keystone-next/keystone/types").JSONValue',
-    Decimal: 'import("@keystone-next/keystone/types").Decimal | string',
+    JSON: 'import("@k6js/ks-next/types").JSONValue',
+    Decimal: 'import("@k6js/ks-next/types").Decimal | string',
   };
 
   let prelude = `import {
@@ -151,7 +151,7 @@ export type ${listTypeInfoName} = {
     listQuery: ${
       listQuery
         ? printArgs(listQuery.arguments!)
-        : 'import("@keystone-next/keystone/types").BaseGeneratedListTypes["args"]["listQuery"]'
+        : 'import("@k6js/ks-next/types").BaseGeneratedListTypes["args"]["listQuery"]'
     }
   };
 };
