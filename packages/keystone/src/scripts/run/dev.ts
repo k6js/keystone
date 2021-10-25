@@ -21,7 +21,7 @@ type ExpressServer = null | ReturnType<typeof express>;
 type AdminUIMiddleware = null | ((req: express.Request, res: express.Response) => Promise<void>);
 
 const devLoadingHTMLFilepath = path.join(
-  path.dirname(require.resolve('@keystone-next/keystone/package.json')),
+  path.dirname(require.resolve('@k6js/ks-next/package.json')),
   'static',
   'dev-loading.html'
 );

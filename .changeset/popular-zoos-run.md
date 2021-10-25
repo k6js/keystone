@@ -1,5 +1,5 @@
 ---
-"@keystone-next/keystone": patch
+"@k6js/ks-next": patch
 "@keystone-next/api-tests-legacy": patch
 "@keystone-next/prisma-utils": patch
 ---

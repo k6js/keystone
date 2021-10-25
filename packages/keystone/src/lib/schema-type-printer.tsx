@@ -90,7 +90,7 @@ export function printGeneratedTypes(
   KeystoneListsAPI as GenericKeystoneListsAPI,
   KeystoneDbAPI as GenericKeystoneDbAPI,
   KeystoneContext as GenericKeystoneContext,
-} from '@keystone-next/keystone/types';
+} from '@k6js/ks-next/types';
 `;
 
   let { printedTypes, ast, printTypeNode } = printInputTypesFromSchema(
@@ -157,8 +157,8 @@ export type ${listTypeInfoName} = {
 };
 
 export type ${listKey}ListFn = (
-  listConfig: import('@keystone-next/keystone').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>
-) => import('@keystone-next/keystone').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>;
+  listConfig: import('@k6js/ks-next').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>
+) => import('@k6js/ks-next').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>;
 `;
     allListsStr += `\n  readonly ${JSON.stringify(listKey)}: ${listTypeInfoName};`;
   }

@@ -37,7 +37,7 @@ test('build works with typescript without the user defining a babel config', asy
     ...symlinkKeystoneDeps,
     ...schemas,
     'keystone.ts': js`
-                     import { config, list } from "@keystone-next/keystone";
+                     import { config, list } from "@k6js/ks-next";
                      import { text } from "@keystone-next/keystone/fields";
 
                      type x = string;

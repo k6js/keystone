@@ -123,13 +123,13 @@ const nodeAPIJS = (
   config: KeystoneConfig
 ) => `import keystoneConfig from '../../keystone';
 import { PrismaClient } from '.prisma/client';
-import { createQueryAPI } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/node-api';
+import { createQueryAPI } from '@k6js/ks-next/___internal-do-not-use-will-break-in-patch/node-api';
 ${makeVercelIncludeTheSQLiteDB(cwd, path.join(cwd, 'node_modules/.keystone/next'), config)}
 
 export const query = createQueryAPI(keystoneConfig, PrismaClient);
 `;
 
-const nodeAPIDTS = `import { KeystoneListsAPI } from '@keystone-next/keystone/types';
+const nodeAPIDTS = `import { KeystoneListsAPI } from '@k6js/ks-next/types';
 import { KeystoneListsTypeInfo } from './types';
 
 export const query: KeystoneListsAPI<KeystoneListsTypeInfo>;`;
@@ -158,7 +158,7 @@ const nextGraphQLAPIJS = (
   config: KeystoneConfig
 ) => `import keystoneConfig from '../../../keystone';
 import { PrismaClient } from '.prisma/client';
-import { nextGraphQLAPIRoute } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/next-graphql';
+import { nextGraphQLAPIRoute } from '@k6js/ks-next/___internal-do-not-use-will-break-in-patch/next-graphql';
 ${makeVercelIncludeTheSQLiteDB(cwd, path.join(cwd, 'node_modules/.keystone/next'), config)}
 
 export const config = {

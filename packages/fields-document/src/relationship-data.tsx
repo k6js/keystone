@@ -2,7 +2,7 @@ import {
   BaseGeneratedListTypes,
   GqlNames,
   KeystoneGraphQLAPI,
-} from '@keystone-next/keystone/types';
+} from '@k6js/ks-next/types';
 import { Descendant } from 'slate';
 import { GraphQLSchema, executeSync, parse } from 'graphql';
 import weakMemoize from '@emotion/weak-memoize';

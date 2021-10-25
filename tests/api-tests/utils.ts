@@ -1,4 +1,4 @@
-import { KeystoneConfig, DatabaseProvider } from '@keystone-next/keystone/types';
+import { KeystoneConfig, DatabaseProvider } from '@k6js/ks-next/types';
 
 // This function injects the db configuration that we use for testing in CI.
 // This functionality is a keystone repo specific way of doing things, so we don't

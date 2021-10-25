@@ -1,6 +1,6 @@
-import { relationship, text } from '@keystone-next/keystone/fields';
-import { list, ListSchemaConfig } from '@keystone-next/keystone';
-import { statelessSessions } from '@keystone-next/keystone/session';
+import { relationship, text } from '@k6js/ks-next/fields';
+import { list, ListSchemaConfig } from '@k6js/ks-next';
+import { statelessSessions } from '@k6js/ks-next/session';
 import { apiTestConfig } from '../utils';
 
 const COOKIE_SECRET = 'qwertyuiopasdfghjlkzxcvbmnm1234567890';

@@ -1,5 +1,5 @@
-import { setupTestEnv, TestEnv } from '@keystone-next/keystone/testing';
-import { getGqlNames, KeystoneContext } from '@keystone-next/keystone/types';
+import { setupTestEnv, TestEnv } from '@k6js/ks-next/testing';
+import { getGqlNames, KeystoneContext } from '@k6js/ks-next/types';
 import {
   getListName,
   listConfigVariables,
