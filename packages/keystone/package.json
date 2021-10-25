@@ -2,8 +2,8 @@
   "name": "@k6js/ks-next",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/keystone-next-keystone.cjs.js",
-  "module": "dist/keystone-next-keystone.esm.js",
+  "main": "dist/k6js-ks-next.cjs.js",
+  "module": "dist/k6js-ks-next.esm.js",
   "files": [
     "session",
     "bin",

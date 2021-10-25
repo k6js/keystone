@@ -2,8 +2,8 @@
   "name": "@k6js/ks-next-auth",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/keystone-next-auth.cjs.js",
-  "module": "dist/keystone-next-auth.esm.js",
+  "main": "dist/k6js-ks-next-auth.cjs.js",
+  "module": "dist/k6js-ks-next-auth.esm.js",
   "engines": {
     "node": "^12.20 || >= 14.13"
   },
