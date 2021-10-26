@@ -1,8 +1,8 @@
 import globby from 'globby';
-import { list } from '@keystone-next/keystone';
-import { text } from '@keystone-next/keystone/fields';
-import { setupTestRunner } from '@keystone-next/keystone/testing';
-import { humanize } from '@keystone-next/keystone/src/lib/utils';
+import { list } from '@k6js/ks-next';
+import { text } from '@k6js/ks-next/fields';
+import { setupTestRunner } from '@k6js/ks-next/testing';
+import { humanize } from '@k6js/ks-next/src/lib/utils';
 import { apiTestConfig, expectValidationError } from '../utils';
 
 const testModules = globby.sync(`packages/**/src/**/test-fixtures.{js,ts}`, {

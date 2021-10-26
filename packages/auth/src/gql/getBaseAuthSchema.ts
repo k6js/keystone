@@ -1,4 +1,4 @@
-import type { GraphQLSchemaExtension, KeystoneContext } from '@keystone-next/keystone/types';
+import type { GraphQLSchemaExtension, KeystoneContext } from '@k6js/ks-next/types';
 
 import { AuthGqlNames, SecretFieldImpl } from '../types';
 

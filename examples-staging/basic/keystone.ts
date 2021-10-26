@@ -1,6 +1,6 @@
-import { config } from '@keystone-next/keystone';
-import { statelessSessions } from '@keystone-next/keystone/session';
-import { createAuth } from '@keystone-next/auth';
+import { config } from '@k6js/ks-next';
+import { statelessSessions } from '@k6js/ks-next/session';
+import { createAuth } from '@k6js/ks-next-auth';
 
 import { lists, extendGraphqlSchema } from './schema';
 
