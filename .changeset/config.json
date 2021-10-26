@@ -1,8 +1,22 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@0.2.1/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "keystonejs/keystone" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "k6js/k6js"
+    }
+  ],
   "commit": false,
   "baseBranch": "main",
   "linked": [],
-  "access": "public"
+  "access": "public",
+  "ignore": [
+    "@keystone-next/cloudinary",
+    "@keystone-next/example-*",
+    "@keystone-next/session-store-redis",
+    "@keystone-next/example-ecommerce",
+    "@keystone-next/examples-app-basic",
+    "@keystone-next/test-projects-*",
+    "@keystone-next/benchmarks-legacy"
+  ]
 }

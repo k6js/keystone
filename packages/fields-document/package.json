@@ -1,7 +1,7 @@
 {
   "name": "@k6js/ks-next-fields-document",
   "description": "KeystoneJS Document Field Type",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "dist/k6js-ks-next-fields-document.cjs.js",
   "module": "dist/k6js-ks-next-fields-document.esm.js",
   "files": [
@@ -19,7 +19,7 @@
     ]
   },
   "peerDependencies": {
-    "@k6js/ks-next": "^0.0.0"
+    "@k6js/ks-next": "^0.1.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
