@@ -1,9 +1,9 @@
 import { AddressInfo } from 'net';
 import superagent from 'superagent';
 import express from 'express';
-import { list } from '@keystone-next/keystone';
-import { text, password } from '@keystone-next/keystone/fields';
-import { setupTestRunner } from '@keystone-next/keystone/testing';
+import { list } from '@k6js/ks-next';
+import { text, password } from '@k6js/ks-next/fields';
+import { setupTestRunner } from '@k6js/ks-next/testing';
 import { apiTestConfig } from '../utils';
 
 const runner = setupTestRunner({

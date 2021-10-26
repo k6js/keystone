@@ -1,6 +1,6 @@
 export const apiTemplate = `
 import keystoneConfig from '../../../../keystone';
-import { initConfig, createSystem, createApolloServerMicro } from '@keystone-next/keystone/system';
+import { initConfig, createSystem, createApolloServerMicro } from '@k6js/ks-next/system';
 import { PrismaClient } from '.prisma/client';
 
 const initializedKeystoneConfig = initConfig(keystoneConfig);

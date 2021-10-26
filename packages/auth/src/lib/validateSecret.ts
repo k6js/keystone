@@ -1,4 +1,4 @@
-import type { KeystoneDbAPI } from '@keystone-next/keystone/types';
+import type { KeystoneDbAPI } from '@k6js/ks-next/types';
 import { SecretFieldImpl } from '../types';
 
 export async function validateSecret(

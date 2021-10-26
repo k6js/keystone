@@ -1,9 +1,9 @@
 {
-  "name": "@keystone-next/fields-document",
+  "name": "@k6js/ks-next-fields-document",
   "description": "KeystoneJS Document Field Type",
-  "version": "11.0.0",
-  "main": "dist/keystone-next-fields-document.cjs.js",
-  "module": "dist/keystone-next-fields-document.esm.js",
+  "version": "0.0.0",
+  "main": "dist/k6js-ks-next-fields-document.cjs.js",
+  "module": "dist/k6js-ks-next-fields-document.esm.js",
   "files": [
     "dist",
     "component-blocks",
@@ -19,7 +19,7 @@
     ]
   },
   "peerDependencies": {
-    "@keystone-next/keystone": "^26.1.1"
+    "@k6js/ks-next": "^0.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
@@ -55,7 +55,7 @@
   },
   "repository": "https://github.com/keystonejs/keystone/tree/main/packages/fields-document",
   "devDependencies": {
-    "@keystone-next/keystone": "*",
+    "@k6js/ks-next": "*",
     "@testing-library/react": "^12.1.2",
     "array.prototype.flat": "^1.2.5",
     "jest-diff": "^27.2.5",

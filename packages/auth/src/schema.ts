@@ -1,5 +1,5 @@
 import { mergeSchemas } from '@graphql-tools/schema';
-import { ExtendGraphqlSchema } from '@keystone-next/keystone/types';
+import { ExtendGraphqlSchema } from '@k6js/ks-next/types';
 
 import {
   assertObjectType,
