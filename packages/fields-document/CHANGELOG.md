@@ -1,5 +1,22 @@
 # @keystone-next/fields-document
 
+## 0.1.0
+
+### Minor Changes
+
+- [#1](https://github.com/k6js/k6js/pull/1) [`cd1777d14`](https://github.com/k6js/k6js/commit/cd1777d1468188fe3c32abd6229ee5f873d452f2) Thanks [@gautamsi](https://github.com/gautamsi)! - Initial release to keep up with Keystone 6
+
+  Notable changes
+
+  - rename packages
+  - test them with example project
+  - future ready with community PR
+
+### Patch Changes
+
+- Updated dependencies [[`cd1777d14`](https://github.com/k6js/k6js/commit/cd1777d1468188fe3c32abd6229ee5f873d452f2)]:
+  - @k6js/ks-next@0.1.0
+
 ## 11.0.0
 
 ### Patch Changes
