@@ -1,7 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { Fragment, HTMLAttributes, ReactNode, useEffect, useMemo, useState } from 'react';
+import {
+  Fragment,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+  FunctionComponent,
+} from 'react';
 
 import { Button } from '@keystone-ui/button';
 import { Box, Center, Heading, jsx, Stack, useTheme } from '@keystone-ui/core';
@@ -34,7 +42,19 @@ import { useFilters } from './useFilters';
 import { useSelectedFields } from './useSelectedFields';
 import { useSort } from './useSort';
 
-type ListPageProps = { listKey: string };
+export type ListPageHooksProp = Partial<{
+  ListPageHeader: FunctionComponent<{ listKey: string }>;
+  ListPrimaryActions: FunctionComponent<{
+    listKey: string;
+    refetch: () => void;
+  }>;
+  ListSelectionActions: FunctionComponent<{
+    list: ListMeta;
+    selectedItems: ReadonlySet<string>;
+    refetch: () => void;
+  }>;
+}>;
+type ListPageProps = { listKey: string; hooks?: ListPageHooksProp };
 
 type FetchedFieldMeta = {
   path: string;
@@ -129,7 +149,7 @@ function useQueryParamsFromLocalStorage(listKey: string) {
 
 export const getListPage = (props: ListPageProps) => () => <ListPage {...props} />;
 
-const ListPage = ({ listKey }: ListPageProps) => {
+const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   const list = useList(listKey);
 
   const { query } = useRouter();
@@ -243,7 +263,15 @@ const ListPage = ({ listKey }: ListPageProps) => {
   const showCreate = !(metaQuery.data?.keystone.adminMeta.list?.hideCreate ?? true) || null;
 
   return (
-    <PageContainer header={<ListPageHeader listKey={listKey} />}>
+    <PageContainer
+      header={
+        hooks.ListPageHeader ? (
+          <hooks.ListPageHeader listKey={listKey} />
+        ) : (
+          <ListPageHeader listKey={listKey} />
+        )
+      }
+    >
       {metaQuery.error ? (
         // TODO: Show errors nicely and with information
         'Error...'
@@ -251,6 +279,9 @@ const ListPage = ({ listKey }: ListPageProps) => {
         <Fragment>
           <Stack across gap="medium" align="center" marginTop="xlarge">
             {showCreate && <CreateButton listKey={listKey} />}
+            {hooks.ListPrimaryActions && (
+              <hooks.ListPrimaryActions listKey={listKey} refetch={refetch} />
+            )}
             {data.count || filters.filters.length ? (
               <FilterAdd listKey={listKey} filterableFields={filterableFields} />
             ) : null}
@@ -281,6 +312,13 @@ const ListPage = ({ listKey }: ListPageProps) => {
                           />
                           {!(metaQuery.data?.keystone.adminMeta.list?.hideDelete ?? true) && (
                             <DeleteManyButton
+                              list={list}
+                              selectedItems={selectedItems}
+                              refetch={refetch}
+                            />
+                          )}
+                          {hooks.ListSelectionActions && (
+                            <hooks.ListSelectionActions
                               list={list}
                               selectedItems={selectedItems}
                               refetch={refetch}
