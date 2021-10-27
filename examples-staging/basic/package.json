@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
-    "@k6js/ks-next": "^0.1.0",
-    "@k6js/ks-next-auth": "^0.1.0",
-    "@k6js/ks-next-fields-document": "^0.1.0",
+    "@k6js/ks-next": "^0.2.0",
+    "@k6js/ks-next-auth": "^0.2.0",
+    "@k6js/ks-next-fields-document": "^0.2.0",
     "@keystone-next/document-renderer": "^4.0.1",
     "@keystone-ui/core": "^3.2.1",
     "@keystone-ui/fields": "^5.0.1",

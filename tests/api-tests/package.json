@@ -14,7 +14,7 @@
     "@hapi/iron": "^6.0.0",
     "@k6js/ks-next": "*",
     "@k6js/ks-next-auth": "*",
-    "@k6js/ks-next-fields-document": "^0.1.0",
+    "@k6js/ks-next-fields-document": "^1.0.0",
     "apollo-server-types": "^3.3.0",
     "cookie-signature": "^1.1.0",
     "cuid": "^2.1.8",

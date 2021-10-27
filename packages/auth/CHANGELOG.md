@@ -1,5 +1,12 @@
 # @keystone-next/auth
 
+## 0.2.0
+
+### Patch Changes
+
+- Updated dependencies [[`6a935cab0`](https://github.com/k6js/k6js/commit/6a935cab0ffd8a08d68b04eb368b08f955a21e59), [`4a7b27539`](https://github.com/k6js/k6js/commit/4a7b2753920a3b736a31d6b27093095144c3a4bd)]:
+  - @k6js/ks-next@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
