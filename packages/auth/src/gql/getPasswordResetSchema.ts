@@ -1,4 +1,5 @@
-import { graphql } from '@keystone-next/keystone';
+import { graphql } from '@k6js/ks-next';
+
 import { AuthGqlNames, AuthTokenTypeConfig, SecretFieldImpl } from '../types';
 
 import { createAuthToken } from '../lib/createAuthToken';

@@ -1,4 +1,4 @@
-import { ExtendGraphqlSchema } from '@keystone-next/keystone/types';
+import { ExtendGraphqlSchema } from '@k6js/ks-next/types';
 
 import {
   assertObjectType,
@@ -7,7 +7,7 @@ import {
   GraphQLString,
   GraphQLID,
 } from 'graphql';
-import { graphql } from '@keystone-next/keystone';
+import { graphql } from '@k6js/ks-next';
 import { AuthGqlNames, AuthTokenTypeConfig, InitFirstItemConfig, SecretFieldImpl } from './types';
 import { getBaseAuthSchema } from './gql/getBaseAuthSchema';
 import { getInitFirstItemSchema } from './gql/getInitFirstItemSchema';

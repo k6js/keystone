@@ -12,9 +12,9 @@ import {
   FieldController,
   FieldControllerConfig,
   FieldProps,
-} from '@keystone-next/keystone/types';
+} from '@k6js/ks-next/types';
 import weakMemoize from '@emotion/weak-memoize';
-import { CellContainer, CellLink } from '@keystone-next/keystone/admin-ui/components';
+import { CellContainer, CellLink } from '@k6js/ks-next/admin-ui/components';
 import { DocumentEditor } from './DocumentEditor';
 import { ComponentBlock } from './component-blocks';
 import { Relationships } from './DocumentEditor/relationship';

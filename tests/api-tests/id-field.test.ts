@@ -1,6 +1,6 @@
-import { list } from '@keystone-next/keystone';
-import { text } from '@keystone-next/keystone/fields';
-import { setupTestRunner } from '@keystone-next/keystone/testing';
+import { list } from '@k6js/ks-next';
+import { text } from '@k6js/ks-next/fields';
+import { setupTestRunner } from '@k6js/ks-next/testing';
 import { isCuid } from 'cuid';
 import { validate } from 'uuid';
 import { apiTestConfig, expectBadUserInput } from './utils';

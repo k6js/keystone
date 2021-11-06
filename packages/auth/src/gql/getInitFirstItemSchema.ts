@@ -1,5 +1,5 @@
-import { graphql } from '@keystone-next/keystone';
-import { ItemRootValue } from '@keystone-next/keystone/types';
+import { graphql } from '@k6js/ks-next';
+import { ItemRootValue } from '@k6js/ks-next/types';
 import { assertInputObjectType, GraphQLInputObjectType, GraphQLSchema } from 'graphql';
 
 import { AuthGqlNames, InitFirstItemConfig } from '../types';

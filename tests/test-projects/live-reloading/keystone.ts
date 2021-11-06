@@ -1,4 +1,4 @@
-import { config } from '@keystone-next/keystone';
+import { config } from '@k6js/ks-next';
 import { lists, extendGraphqlSchema } from './schemas';
 
 export default config({

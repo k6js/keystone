@@ -1,5 +1,5 @@
-import { graphQLSchemaExtension, list } from '@keystone-next/keystone';
-import { text } from '@keystone-next/keystone/fields';
+import { graphQLSchemaExtension, list } from '@k6js/ks-next';
+import { text } from '@k6js/ks-next/fields';
 
 export const lists = {
   Something: list({

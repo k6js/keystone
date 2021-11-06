@@ -11,8 +11,8 @@
   "repository": "https://github.com/keystonejs/keystone/tree/main/tests/admin-ui-tests",
   "homepage": "https://github.com/keystonejs/keystone",
   "devDependencies": {
-    "@keystone-next/auth": "*",
-    "@keystone-next/keystone": "*",
+    "@k6js/ks-next": "*",
+    "@k6js/ks-next-auth": "*",
     "execa": "^5.1.1",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
