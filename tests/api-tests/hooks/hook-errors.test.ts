@@ -1,8 +1,8 @@
-import { text } from '@k6js/ks-next/fields';
+import { relationship, text } from '@k6js/ks-next/fields';
 import { list } from '@k6js/ks-next';
 import { GraphQLRequest, setupTestRunner } from '@k6js/ks-next/testing';
 import { KeystoneContext } from '@k6js/ks-next/types';
-import { apiTestConfig, expectExtensionError } from '../utils';
+import { apiTestConfig, expectExtensionError, unpackErrors } from '../utils';
 
 const runner = (debug: boolean | undefined) =>
   setupTestRunner({
@@ -86,6 +86,18 @@ const runner = (debug: boolean | undefined) =>
                       throw new Error('Simulated error: content: afterOperation');
                     }
                   }
+                },
+              },
+            }),
+          },
+        }),
+        BadResolveInput: list({
+          fields: {
+            badResolveInput: relationship({
+              ref: 'Post',
+              hooks: {
+                resolveInput() {
+                  return { blah: true };
                 },
               },
             }),
@@ -585,3 +597,28 @@ const runner = (debug: boolean | undefined) =>
     );
   });
 });
+
+test(
+  'bad resolve input',
+  runner(true)(async ({ context }) => {
+    const { data, errors } = await context.graphql.raw({
+      query: `mutation { createBadResolveInput(data: {}) { id } }`,
+    });
+    expect(data).toEqual({ createBadResolveInput: null });
+    const unpackedErrors = unpackErrors(errors);
+    expect(unpackedErrors).toEqual([
+      {
+        extensions: {
+          code: 'KS_PRISMA_ERROR',
+          debug: {
+            message: expect.stringMatching(
+              /Unknown arg `blah` in data\.badResolveInput\.blah for type PostCreateNestedOneWithoutFrom_BadResolveInput_badResolveInputInput\./
+            ),
+          },
+        },
+        path: ['createBadResolveInput'],
+        message: 'Prisma error',
+      },
+    ]);
+  })
+);

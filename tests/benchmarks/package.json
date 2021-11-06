@@ -2,7 +2,7 @@
   "name": "@keystone-next/benchmarks-legacy",
   "description": "A set of benchmarks for running against the KeystoneJS API.",
   "private": true,
-  "version": "7.0.10",
+  "version": "7.0.11",
   "author": "The KeystoneJS Development Team",
   "license": "MIT",
   "engines": {
