@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 0.3.0
+
+### Minor Changes
+
+- bring in latest keystone 27 changes
+
 ## 0.2.0
 
 ### Minor Changes
@@ -19,7 +25,7 @@
   - rename packages
   - test them with example project
   - future ready with community PR
-  
+
 ## 27.0.1
 
 ### Patch Changes

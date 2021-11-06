@@ -1,5 +1,16 @@
 # @keystone-next/auth
 
+## 0.3.0
+
+### Minor Changes
+
+- bring in latest keystone 27 changes
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @k6js/ks-next@0.3.0
+
 ## 0.2.0
 
 ### Patch Changes
