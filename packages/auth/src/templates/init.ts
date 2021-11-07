@@ -1,4 +1,4 @@
-import { BaseGeneratedListTypes } from '@k6js/ks-next/types';
+import { BaseGeneratedListTypes } from '@keystone-next/keystone/types';
 import { AuthConfig } from '../types';
 
 type InitTemplateArgs = {
@@ -8,7 +8,7 @@ type InitTemplateArgs = {
 
 export const initTemplate = ({ listKey, initFirstItem }: InitTemplateArgs) => {
   // -- TEMPLATE START
-  return `import { getInitPage } from '@k6js/ks-next-auth/pages/InitPage';
+  return `import { getInitPage } from '@keystone-next/auth/pages/InitPage';
 
 const fieldPaths = ${JSON.stringify(initFirstItem.fields)};
 

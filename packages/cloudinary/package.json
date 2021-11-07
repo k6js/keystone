@@ -17,10 +17,10 @@
     "react": "^17.0.2"
   },
   "peerDependencies": {
-    "@k6js/ks-next": "^0.3.0"
+    "@keystone-next/keystone": "^27.0.0"
   },
   "devDependencies": {
-    "@k6js/ks-next": "^0.3.0",
+    "@keystone-next/keystone": "^27.0.0",
     "mime": "^2.5.2"
   },
   "engines": {

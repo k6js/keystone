@@ -7,19 +7,19 @@ import fetch from 'cross-fetch';
 import { jsx, H1, Stack, Inline, VisuallyHidden } from '@keystone-ui/core';
 import { Button } from '@keystone-ui/button';
 import { Checkbox, TextInput } from '@keystone-ui/fields';
-import { useRawKeystone } from '@k6js/ks-next/admin-ui/context';
-import { FieldMeta } from '@k6js/ks-next/types';
+import { useRawKeystone } from '@keystone-next/keystone/admin-ui/context';
+import { FieldMeta } from '@keystone-next/keystone/types';
 import isDeepEqual from 'fast-deep-equal';
 
-import { gql, useMutation } from '@k6js/ks-next/admin-ui/apollo';
-import { useReinitContext, useKeystone } from '@k6js/ks-next/admin-ui/context';
-import { useRouter, Link } from '@k6js/ks-next/admin-ui/router';
-import { GraphQLErrorNotice } from '@k6js/ks-next/admin-ui/components';
+import { gql, useMutation } from '@keystone-next/keystone/admin-ui/apollo';
+import { useReinitContext, useKeystone } from '@keystone-next/keystone/admin-ui/context';
+import { useRouter, Link } from '@keystone-next/keystone/admin-ui/router';
+import { GraphQLErrorNotice } from '@keystone-next/keystone/admin-ui/components';
 import {
   Fields,
   serializeValueToObjByFieldKey,
   useInvalidFields,
-} from '@k6js/ks-next/admin-ui/utils';
+} from '@keystone-next/keystone/admin-ui/utils';
 import { guessEmailFromValue, validEmail } from '../lib/emailHeuristics';
 import { IconTwitter, IconGithub } from '../components/Icons';
 import { SigninContainer } from '../components/SigninContainer';
@@ -51,7 +51,7 @@ const Welcome = ({ value }: { value: any }) => {
           body: JSON.stringify({
             name: value.username,
             email,
-            source: '@k6js/ks-next-auth InitPage',
+            source: '@keystone-next/auth InitPage',
           }),
         })
           .then(res => {

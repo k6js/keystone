@@ -4,16 +4,16 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "k6js-next dev",
-    "start": "k6js-next start",
-    "build": "k6js-next build"
+    "dev": "keystone-next dev",
+    "start": "keystone-next start",
+    "build": "keystone-next build"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
-    "@k6js/ks-next": "^0.3.0",
-    "@k6js/ks-next-auth": "^0.3.0",
-    "@k6js/ks-next-fields-document": "^0.3.0",
+    "@keystone-next/auth": "^35.0.0",
     "@keystone-next/document-renderer": "^4.0.1",
+    "@keystone-next/fields-document": "^12.0.0",
+    "@keystone-next/keystone": "^27.0.0",
     "@keystone-ui/core": "^3.2.1",
     "@keystone-ui/fields": "^5.0.1",
     "@keystone-ui/icons": "^4.0.2",

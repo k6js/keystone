@@ -6,8 +6,8 @@ import {
   KeystoneContext,
   AdminUIConfig,
   SessionStrategy,
-} from '@k6js/ks-next/types';
-import { password, timestamp } from '@k6js/ks-next/fields';
+} from '@keystone-next/keystone/types';
+import { password, timestamp } from '@keystone-next/keystone/fields';
 
 import { AuthConfig, AuthGqlNames } from './types';
 import { getSchemaExtension } from './schema';

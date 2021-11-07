@@ -1,8 +1,8 @@
 import { gen, sampleOne } from 'testcheck';
-import { text, relationship } from '@k6js/ks-next/fields';
-import { list } from '@k6js/ks-next';
-import { KeystoneContext } from '@k6js/ks-next/types';
-import { setupTestRunner } from '@k6js/ks-next/testing';
+import { text, relationship } from '@keystone-next/keystone/fields';
+import { list } from '@keystone-next/keystone';
+import { KeystoneContext } from '@keystone-next/keystone/types';
+import { setupTestRunner } from '@keystone-next/keystone/testing';
 import { apiTestConfig } from '../../../utils';
 
 const alphanumGenerator = gen.alphaNumString.notEmpty();

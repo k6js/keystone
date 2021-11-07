@@ -1,6 +1,6 @@
-import { integer, relationship, text, virtual } from '@k6js/ks-next/fields';
-import { BaseFields, list, graphql } from '@k6js/ks-next';
-import { setupTestEnv, setupTestRunner } from '@k6js/ks-next/testing';
+import { integer, relationship, text, virtual } from '@keystone-next/keystone/fields';
+import { BaseFields, list, graphql } from '@keystone-next/keystone';
+import { setupTestEnv, setupTestRunner } from '@keystone-next/keystone/testing';
 import { apiTestConfig } from '../../utils';
 
 function makeRunner(fields: BaseFields<any>) {

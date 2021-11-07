@@ -1,4 +1,4 @@
-import { config } from '@k6js/ks-next';
+import { config } from '@keystone-next/keystone';
 import { lists } from './schema';
 
 export default config({

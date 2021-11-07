@@ -1,6 +1,6 @@
-const { text } = require('@k6js/ks-next/fields');
-const { list } = require('@k6js/ks-next');
-const { setupTestRunner } = require('@k6js/ks-next/testing');
+const { text } = require('@keystone-next/keystone/fields');
+const { list } = require('@keystone-next/keystone');
+const { setupTestRunner } = require('@keystone-next/keystone/testing');
 const { apiTestConfig } = require('../../utils.ts');
 const { FixtureGroup, timeQuery, populate, range } = require('../lib/utils');
 

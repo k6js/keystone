@@ -1,6 +1,5 @@
-import type { ItemRootValue } from '@k6js/ks-next/types';
-import { graphql } from '@k6js/ks-next';
-
+import type { ItemRootValue } from '@keystone-next/keystone/types';
+import { graphql } from '@keystone-next/keystone';
 import { AuthGqlNames, AuthTokenTypeConfig, SecretFieldImpl } from '../types';
 
 import { createAuthToken } from '../lib/createAuthToken';

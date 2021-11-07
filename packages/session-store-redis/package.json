@@ -12,10 +12,10 @@
     "@types/redis": "^2.8.32"
   },
   "peerDependencies": {
-    "@k6js/ks-next": "^0.3.0"
+    "@keystone-next/keystone": "^27.0.0"
   },
   "devDependencies": {
-    "@k6js/ks-next": "^0.3.0",
+    "@keystone-next/keystone": "^27.0.0",
     "redis": "^3.1.2"
   },
   "repository": "https://github.com/keystonejs/keystone/tree/main/packages/session-store-redis"

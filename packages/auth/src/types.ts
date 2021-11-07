@@ -1,4 +1,4 @@
-import { BaseGeneratedListTypes, KeystoneContext } from '@k6js/ks-next/types';
+import { BaseGeneratedListTypes, KeystoneContext } from '@keystone-next/keystone/types';
 
 export type AuthGqlNames = {
   CreateInitialInput: string;

@@ -1,6 +1,6 @@
 {
   "name": "@k6js/ks-next",
-  "version": "0.3.0-dev1",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "dist/k6js-ks-next.cjs.js",
   "module": "dist/k6js-ks-next.esm.js",

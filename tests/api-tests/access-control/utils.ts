@@ -1,7 +1,7 @@
-import { text, password } from '@k6js/ks-next/fields';
-import { list, ListSchemaConfig } from '@k6js/ks-next';
-import { statelessSessions } from '@k6js/ks-next/session';
-import { createAuth } from '@k6js/ks-next-auth';
+import { text, password } from '@keystone-next/keystone/fields';
+import { list, ListSchemaConfig } from '@keystone-next/keystone';
+import { statelessSessions } from '@keystone-next/keystone/session';
+import { createAuth } from '@keystone-next/auth';
 import { apiTestConfig } from '../utils';
 
 const FAKE_ID = 'cdsfasfafafadfasdf';
