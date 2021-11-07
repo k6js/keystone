@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 0.4.0
+
+### Minor Changes
+
+- [`dd1223c93`](https://github.com/k6js/k6js/commit/dd1223c93181d6b859a37529008dfb0454755e3b) Thanks [@gautamsi](https://github.com/gautamsi)! - using yarn 3. reverted most changes to take advantage of resolutions instead of patching several packages.
+
 ## 0.3.0
 
 ### Minor Changes
