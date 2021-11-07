@@ -1,7 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { Fragment, HTMLAttributes, ReactNode, useEffect, useMemo, useState } from 'react';
+import {
+  Fragment,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+  FunctionComponent,
+} from 'react';
 
 import { Button } from '@keystone-ui/button';
 import { Box, Center, Heading, jsx, Stack, useTheme } from '@keystone-ui/core';
@@ -23,6 +31,7 @@ import { CellLink } from '../../../../admin-ui/components';
 import { CreateItemDrawer } from '../../../../admin-ui/components/CreateItemDrawer';
 import { PageContainer, HEADER_HEIGHT } from '../../../../admin-ui/components/PageContainer';
 import { Pagination, PaginationLabel } from '../../../../admin-ui/components/Pagination';
+import { UpdateItemsDrawer } from '../../../../admin-ui/components/UpdateItemsDrawer';
 import { useList } from '../../../../admin-ui/context';
 import { Link, useRouter } from '../../../../admin-ui/router';
 import { FieldSelection } from './FieldSelection';
@@ -33,7 +42,19 @@ import { useFilters } from './useFilters';
 import { useSelectedFields } from './useSelectedFields';
 import { useSort } from './useSort';
 
-type ListPageProps = { listKey: string };
+export type ListPageHooksProp = Partial<{
+  ListPageHeader: FunctionComponent<{ listKey: string }>;
+  ListPrimaryActions: FunctionComponent<{
+    listKey: string;
+    refetch: () => void;
+  }>;
+  ListSelectionActions: FunctionComponent<{
+    list: ListMeta;
+    selectedItems: ReadonlySet<string>;
+    refetch: () => void;
+  }>;
+}>;
+type ListPageProps = { listKey: string; hooks?: ListPageHooksProp };
 
 type FetchedFieldMeta = {
   path: string;
@@ -128,7 +149,7 @@ function useQueryParamsFromLocalStorage(listKey: string) {
 
 export const getListPage = (props: ListPageProps) => () => <ListPage {...props} />;
 
-const ListPage = ({ listKey }: ListPageProps) => {
+const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   const list = useList(listKey);
 
   const { query } = useRouter();
@@ -242,7 +263,15 @@ const ListPage = ({ listKey }: ListPageProps) => {
   const showCreate = !(metaQuery.data?.keystone.adminMeta.list?.hideCreate ?? true) || null;
 
   return (
-    <PageContainer header={<ListPageHeader listKey={listKey} />}>
+    <PageContainer
+      header={
+        hooks.ListPageHeader ? (
+          <hooks.ListPageHeader listKey={listKey} />
+        ) : (
+          <ListPageHeader listKey={listKey} />
+        )
+      }
+    >
       {metaQuery.error ? (
         // TODO: Show errors nicely and with information
         'Error...'
@@ -250,6 +279,9 @@ const ListPage = ({ listKey }: ListPageProps) => {
         <Fragment>
           <Stack across gap="medium" align="center" marginTop="xlarge">
             {showCreate && <CreateButton listKey={listKey} />}
+            {hooks.ListPrimaryActions && (
+              <hooks.ListPrimaryActions listKey={listKey} refetch={refetch} />
+            )}
             {data.count || filters.filters.length ? (
               <FilterAdd listKey={listKey} filterableFields={filterableFields} />
             ) : null}
@@ -272,13 +304,27 @@ const ListPage = ({ listKey }: ListPageProps) => {
                         <span css={{ marginRight: theme.spacing.small }}>
                           Selected {selectedItemsCount} of {data.items.length}
                         </span>
-                        {!(metaQuery.data?.keystone.adminMeta.list?.hideDelete ?? true) && (
-                          <DeleteManyButton
+                        <Stack across gap="small" align="center" marginTop="none">
+                          <UpdateManyButton
                             list={list}
                             selectedItems={selectedItems}
                             refetch={refetch}
                           />
-                        )}
+                          {!(metaQuery.data?.keystone.adminMeta.list?.hideDelete ?? true) && (
+                            <DeleteManyButton
+                              list={list}
+                              selectedItems={selectedItems}
+                              refetch={refetch}
+                            />
+                          )}
+                          {hooks.ListSelectionActions && (
+                            <hooks.ListSelectionActions
+                              list={list}
+                              selectedItems={selectedItems}
+                              refetch={refetch}
+                            />
+                          )}
+                        </Stack>
                       </Fragment>
                     );
                   }
@@ -388,18 +434,19 @@ const ListPageHeader = ({ listKey }: { listKey: string }) => {
 };
 
 const ResultsSummaryContainer = ({ children }: { children: ReactNode }) => (
-  <p
+  <div
     css={{
       // TODO: don't do this
       // (this is to make it so things don't move when a user selects an item)
       minHeight: 38,
-
+      marginTop: '1em',
+      marginBottom: '1em',
       display: 'flex',
       alignItems: 'center',
     }}
   >
     {children}
-  </p>
+  </div>
 );
 
 const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC' }) => {
@@ -421,6 +468,43 @@ const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC' }) => {
     />
   );
 };
+
+function UpdateManyButton({
+  selectedItems,
+  list,
+  refetch,
+}: {
+  selectedItems: ReadonlySet<string>;
+  list: ListMeta;
+  refetch: () => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Fragment>
+      <Button
+        tone="active"
+        onClick={async () => {
+          setIsOpen(true);
+        }}
+      >
+        Update
+      </Button>
+      <DrawerController isOpen={isOpen}>
+        <UpdateItemsDrawer
+          selectedItems={selectedItems}
+          listKey={list.key}
+          onUpdate={() => {
+            refetch();
+            setIsOpen(false);
+          }}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      </DrawerController>
+    </Fragment>
+  );
+}
 
 function DeleteManyButton({
   selectedItems,

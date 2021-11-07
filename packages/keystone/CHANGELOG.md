@@ -1,5 +1,31 @@
 # @keystone-next/keystone
 
+## 0.3.0
+
+### Minor Changes
+
+- bring in latest keystone 27 changes
+
+## 0.2.0
+
+### Minor Changes
+
+- [#3](https://github.com/k6js/k6js/pull/3) [`6a935cab0`](https://github.com/k6js/k6js/commit/6a935cab0ffd8a08d68b04eb368b08f955a21e59) Thanks [@gautamsi](https://github.com/gautamsi)! - Added various UI hooks, see code for how to use them.
+
+* [#2](https://github.com/k6js/k6js/pull/2) [`4a7b27539`](https://github.com/k6js/k6js/commit/4a7b2753920a3b736a31d6b27093095144c3a4bd) Thanks [@gautamsi](https://github.com/gautamsi)! - Added support for updating multiple items in admin ui. You can select multiple item and select fiedls to update.
+
+## 0.1.0
+
+### Minor Changes
+
+- [#1](https://github.com/k6js/k6js/pull/1) [`cd1777d14`](https://github.com/k6js/k6js/commit/cd1777d1468188fe3c32abd6229ee5f873d452f2) Thanks [@gautamsi](https://github.com/gautamsi)! - Initial release to keep up with Keystone 6
+
+  Notable changes
+
+  - rename packages
+  - test them with example project
+  - future ready with community PR
+
 ## 27.0.1
 
 ### Patch Changes
