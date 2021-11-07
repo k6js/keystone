@@ -19,7 +19,7 @@ export const config = withPreconstruct({
     if (isServer) {
       config.externals = [
         ...config.externals,
-        /@keystone-next\/keystone(?!\/___internal-do-not-use-will-break-in-patch\/admin-ui\/id-field-view|\/fields\/types\/[^\/]+\/views)/,
+        /@k6js\/ks-next(?!\/___internal-do-not-use-will-break-in-patch\/admin-ui\/id-field-view|\/fields\/types\/[^\/]+\/views)/,
         '.prisma/client',
       ];
       // we need to set these to true so that when __dirname/__filename is used
