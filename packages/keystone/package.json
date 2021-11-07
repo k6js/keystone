@@ -23,7 +23,7 @@
     "system"
   ],
   "bin": {
-    "k6js-next": "bin/cli.js"
+    "keystone-next": "bin/cli.js"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
