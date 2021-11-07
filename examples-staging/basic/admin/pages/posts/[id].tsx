@@ -5,11 +5,11 @@ import { jsx, useTheme } from '@keystone-ui/core';
 import {
   getItemPage,
   ItemPageHooksProps,
-} from '@k6js/ks-next/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
+} from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
 
-import { gql } from '@k6js/ks-next';
+// import { gql } from '@keystone-next/keystone';
 import { Fragment } from 'react';
-import { useList } from '@k6js/ks-next/admin-ui/context';
+import { useList } from '@keystone-next/keystone/admin-ui/context';
 
 const hooks: ItemPageHooksProps = {
   ItemPageSidebar({ listKey, item }) {

@@ -2,15 +2,15 @@
 /** @jsx jsx */
 import { jsx, useTheme } from '@keystone-ui/core';
 
-import {
-  getItemPage,
-  ItemPageHooksProps,
-} from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
+// import {
+//   getItemPage,
+//   ItemPageHooksProps,
+// } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
 
 import { Fragment } from 'react';
 import { useList } from '@keystone-next/keystone/admin-ui/context';
 
-export function ItemPageSidebar({ listKey, item }) {
+export function ItemPageSidebar({ listKey, item }: any) {
   const { spacing } = useTheme();
   return (
     <Fragment>
@@ -26,7 +26,7 @@ export function ItemPageSidebar({ listKey, item }) {
     </Fragment>
   );
 }
-export function ItemPageHeader({ listKey, item }) {
+export function ItemPageHeader({ listKey, item }: any) {
   const list = useList(listKey);
   return (
     <div>

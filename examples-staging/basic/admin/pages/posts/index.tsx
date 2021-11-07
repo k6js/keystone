@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Stack, useTheme } from '@keystone-ui/core';
+import { jsx, Stack } from '@keystone-ui/core';
 
 import {
   getListPage,
@@ -8,7 +8,6 @@ import {
 } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ListPage';
 import { useList } from '@keystone-next/keystone/admin-ui/context';
 import { Button } from '@keystone-ui/button';
-import { Fragment } from 'react';
 
 const hooks: ListPageHooksProp = {
   ListPageHeader({ listKey }) {
@@ -19,7 +18,7 @@ const hooks: ListPageHooksProp = {
       </div>
     );
   },
-  ListPrimaryActions({ listKey, refetch }) {
+  ListPrimaryActions(/*{ listKey, refetch }*/) {
     return (
       <Stack across gap="small" align="start">
         <Button tone="active" size="small" weight="light">
@@ -43,7 +42,7 @@ const hooks: ListPageHooksProp = {
       </Stack>
     );
   },
-  ListSelectionActions({ listKey, refetch }) {
+  ListSelectionActions(/*{ listKey, refetch }*/) {
     return (
       <Stack across gap="small" align="start">
         <Button tone="active" size="small" weight="bold">
