@@ -29,6 +29,7 @@
     "publish-changed": "yarn build && changeset publish --public",
     "version-packages": "changeset version",
     "build": "preconstruct build",
+    "postinstall": "yarn prepare",
     "prepare": "manypkg check && preconstruct dev && yarn run --silent contributing-guide && cd examples-staging/basic && yarn keystone-next postinstall",
     "contributing-guide": "is-ci && exit 0 || chalk -t \"{bold 📝 Contributing to KeystoneJS?}\" && terminal-link \"🔗 Read the full Contributing Guide\" \"https://github.com/keystonejs/keystone/blob/main/CONTRIBUTING.md\"",
     "npm-tag": "manypkg npm-tag",
@@ -153,10 +154,11 @@
     ]
   },
   "resolutions": {
-    "@keystone-next/keystone": "file:./packages/keystone",
+    "@keystone-next/keystone": "npm:@k6js/ks-next@*",
     "babel-plugin-remove-graphql-queries": "2.7.2"
   },
   "engines": {
     "node": "^12.20 || >= 14.13"
-  }
+  },
+  "packageManager": "yarn@3.1.0"
 }
