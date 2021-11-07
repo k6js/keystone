@@ -13,7 +13,7 @@ import { KeystoneConfig } from '../../types';
 import { cli } from '../cli';
 import { mockPrompts } from '../../lib/prompts';
 
-export const cliBinPath = require.resolve('@k6js/ks-next/bin/cli.js');
+export const cliBinPath = require.resolve('@keystone-next/keystone/bin/cli.js');
 
 export const js = outdent;
 export const ts = outdent;
@@ -21,8 +21,8 @@ export const tsx = outdent;
 export const graphql = outdent;
 
 export const basicKeystoneConfig = js`
-                                     import { config, list } from "@k6js/ks-next";
-                                     import { text } from "@k6js/ks-next/fields";
+                                     import { config, list } from "@keystone-next/keystone";
+                                     import { text } from "@keystone-next/keystone/fields";
 
                                      export default config({
                                        db: { provider: "sqlite", url: "file:./app.db" },
@@ -113,8 +113,8 @@ let f = fixturez(__dirname);
 
 export const symlinkKeystoneDeps = Object.fromEntries(
   [
-    '@k6js/ks-next',
-    '@k6js/ks-next-auth',
+    '@keystone-next/keystone',
+    '@keystone-next/auth',
     '@prisma/engines',
     '@prisma/client',
     'typescript',

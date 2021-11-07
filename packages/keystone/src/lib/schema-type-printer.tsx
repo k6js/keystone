@@ -82,15 +82,15 @@ export function printGeneratedTypes(
     String: 'string',
     Int: 'number',
     Float: 'number',
-    JSON: 'import("@k6js/ks-next/types").JSONValue',
-    Decimal: 'import("@k6js/ks-next/types").Decimal | string',
+    JSON: 'import("@keystone-next/keystone/types").JSONValue',
+    Decimal: 'import("@keystone-next/keystone/types").Decimal | string',
   };
 
   let prelude = `import {
   KeystoneListsAPI as GenericKeystoneListsAPI,
   KeystoneDbAPI as GenericKeystoneDbAPI,
   KeystoneContext as GenericKeystoneContext,
-} from '@k6js/ks-next/types';
+} from '@keystone-next/keystone/types';
 `;
 
   let { printedTypes, ast, printTypeNode } = printInputTypesFromSchema(
@@ -151,14 +151,14 @@ export type ${listTypeInfoName} = {
     listQuery: ${
       listQuery
         ? printArgs(listQuery.arguments!)
-        : 'import("@k6js/ks-next/types").BaseGeneratedListTypes["args"]["listQuery"]'
+        : 'import("@keystone-next/keystone/types").BaseGeneratedListTypes["args"]["listQuery"]'
     }
   };
 };
 
 export type ${listKey}ListFn = (
-  listConfig: import('@k6js/ks-next').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>
-) => import('@k6js/ks-next').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>;
+  listConfig: import('@keystone-next/keystone').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>
+) => import('@keystone-next/keystone').ListConfig<${listTypeInfoName}, ${listTypeInfoName}['fields']>;
 `;
     allListsStr += `\n  readonly ${JSON.stringify(listKey)}: ${listTypeInfoName};`;
   }

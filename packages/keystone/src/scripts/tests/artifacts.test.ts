@@ -111,14 +111,14 @@ describe('postinstall', () => {
     await runCommand(tmp, 'postinstall');
     expect(await getFiles(tmp, ['node_modules/.keystone/api.{d.ts,js}'])).toMatchInlineSnapshot(`
       ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ node_modules/.keystone/api.d.ts ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-      import { KeystoneListsAPI } from '@k6js/ks-next/types';
+      import { KeystoneListsAPI } from '@keystone-next/keystone/types';
       import { KeystoneListsTypeInfo } from './types';
 
       export const query: KeystoneListsAPI<KeystoneListsTypeInfo>;
       ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ node_modules/.keystone/api.js ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
       import keystoneConfig from '../../keystone';
       import { PrismaClient } from '.prisma/client';
-      import { createQueryAPI } from '@k6js/ks-next/___internal-do-not-use-will-break-in-patch/node-api';
+      import { createQueryAPI } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/node-api';
       import path from 'path';
 
           path.join(__dirname, "../../../app.db");
@@ -150,7 +150,7 @@ describe('postinstall', () => {
       ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ node_modules/.keystone/next/graphql-api.js ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
       import keystoneConfig from '../../../keystone';
       import { PrismaClient } from '.prisma/client';
-      import { nextGraphQLAPIRoute } from '@k6js/ks-next/___internal-do-not-use-will-break-in-patch/next-graphql';
+      import { nextGraphQLAPIRoute } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/next-graphql';
       import path from 'path';
 
           path.join(__dirname, "../../../app.db");
