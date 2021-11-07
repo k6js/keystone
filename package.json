@@ -153,6 +153,7 @@
     ]
   },
   "resolutions": {
+    "@keystone-next/keystone": "file:./packages/keystone",
     "babel-plugin-remove-graphql-queries": "2.7.2"
   },
   "engines": {

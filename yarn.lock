@@ -1785,10 +1785,8 @@
   resolved "https://registry.yarnpkg.com/@josephg/resolvable/-/resolvable-1.0.1.tgz#69bc4db754d79e1a2f17a650d3466e038d94a5eb"
   integrity sha512-CtzORUwWTTOTqfVtHaKRJ0I1kNQd1bpn3sUh8I3nJDVY+5/M/Oe1DnEWzPQvqq/xPIIkzzzIP7mfCoAjFRvDhg==
 
-"@keystone-next/keystone@^27.0.0":
-  version "27.0.1"
-  resolved "https://registry.yarnpkg.com/@keystone-next/keystone/-/keystone-27.0.1.tgz#70449ccb03304676375ec3f7231a3cfe05db3668"
-  integrity sha512-yzpnAH5Za3Mm4GMiqJ/hLZwKIChl8uk+OOBL5eyWmigDgH3pM9UvNwXfoAX1Cqs2DVChPDZyIeTFPry/PUZ4UA==
+"@keystone-next/keystone@^27.0.0", "@keystone-next/keystone@file:./packages/keystone":
+  version "0.3.0"
   dependencies:
     "@apollo/client" "^3.4.16"
     "@babel/core" "^7.15.8"
