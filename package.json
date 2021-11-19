@@ -155,6 +155,7 @@
     ]
   },
   "resolutions": {
+    "@apollo/client": "3.4.16",
     "@keystone-next/keystone": "npm:@k6js/ks-next@*",
     "babel-plugin-remove-graphql-queries": "2.7.2"
   },
