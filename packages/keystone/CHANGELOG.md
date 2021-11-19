@@ -32,6 +32,35 @@
   - test them with example project
   - future ready with community PR
 
+## 28.0.0
+
+### Major Changes
+
+- [#6915](https://github.com/keystonejs/keystone/pull/6915) [`b981f4c3e`](https://github.com/keystonejs/keystone/commit/b981f4c3ee135a1184188deb5ed8de22f718080c) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - `select`, `timestamp`, `float` and `decimal` fields with `isIndexed: 'unique'` now add unique filters to `ListWhereUniqueInput` like `text`, `integer` and the id field do.
+
+### Minor Changes
+
+- [#6907](https://github.com/keystonejs/keystone/pull/6907) [`990b56291`](https://github.com/keystonejs/keystone/commit/990b56291e677077656b201b935086754c6257f1) Thanks [@JedWatson](https://github.com/JedWatson)! - Added `db.map` option to lists and fields which adds the `@@map` and `@map` Prisma attributes respectively
+
+### Patch Changes
+
+- [#6918](https://github.com/keystonejs/keystone/pull/6918) [`70eb86237`](https://github.com/keystonejs/keystone/commit/70eb86237bd3eafd36b0579f66ad3f1e173357b1) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - The format of the date shown in the `timestamp` field in the Admin UI now uses the user's locale
+
+- Updated dependencies [[`70eb86237`](https://github.com/keystonejs/keystone/commit/70eb86237bd3eafd36b0579f66ad3f1e173357b1)]:
+  - @keystone-ui/fields@5.0.2
+
+## 27.0.2
+
+### Patch Changes
+
+- [#6895](https://github.com/keystonejs/keystone/pull/6895) [`14d74b014`](https://github.com/keystonejs/keystone/commit/14d74b0149a6d34063c8c7d6df5071694e639291) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Fixed importing packages that provide Node ESM
+
+* [#6893](https://github.com/keystonejs/keystone/pull/6893) [`465eb3f95`](https://github.com/keystonejs/keystone/commit/465eb3f9595892cec34d17e1b7c21aea0c61a9d6) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Local images and files are no longer restricted behind `ui.isAccessAllowed`
+
+- [#6904](https://github.com/keystonejs/keystone/pull/6904) [`859ccb974`](https://github.com/keystonejs/keystone/commit/859ccb97489370443bc8d78b0bd7543d83f5b381) Thanks [@gwyneplaine](https://github.com/gwyneplaine)! - Update prisma monorepo to [v3.4.0 (minor)](https://github.com/prisma/prisma/releases/tag/3.4.0)
+
+* [#6910](https://github.com/keystonejs/keystone/pull/6910) [`127a0db64`](https://github.com/keystonejs/keystone/commit/127a0db646ecbfb9ec51c58a98d013e4e7ead20a) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Keystone will continue starting up when Keystone Cloud is configured but fails to connect
+
 ## 27.0.1
 
 ### Patch Changes

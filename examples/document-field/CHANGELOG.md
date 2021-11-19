@@ -1,5 +1,22 @@
 # @keystone-next/example-document-field
 
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`70eb86237`](https://github.com/keystonejs/keystone/commit/70eb86237bd3eafd36b0579f66ad3f1e173357b1), [`990b56291`](https://github.com/keystonejs/keystone/commit/990b56291e677077656b201b935086754c6257f1), [`b981f4c3e`](https://github.com/keystonejs/keystone/commit/b981f4c3ee135a1184188deb5ed8de22f718080c)]:
+  - @keystone-next/keystone@28.0.0
+  - @keystone-next/fields-document@13.0.0
+
+## 1.1.7
+
+### Patch Changes
+
+- [#6889](https://github.com/keystonejs/keystone/pull/6889) [`191c46820`](https://github.com/keystonejs/keystone/commit/191c468202c1aa872988bed55c0ce555b3dfde70) Thanks [@bladey](https://github.com/bladey)! - Updated GraphQL filters to use most recent API.
+
+- Updated dependencies [[`14d74b014`](https://github.com/keystonejs/keystone/commit/14d74b0149a6d34063c8c7d6df5071694e639291), [`465eb3f95`](https://github.com/keystonejs/keystone/commit/465eb3f9595892cec34d17e1b7c21aea0c61a9d6), [`859ccb974`](https://github.com/keystonejs/keystone/commit/859ccb97489370443bc8d78b0bd7543d83f5b381), [`127a0db64`](https://github.com/keystonejs/keystone/commit/127a0db646ecbfb9ec51c58a98d013e4e7ead20a)]:
+  - @keystone-next/keystone@27.0.2
+
 ## 1.1.6
 
 ### Patch Changes
