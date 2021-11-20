@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 0.5.0
+
+### Minor Changes
+
+- [#4](https://github.com/k6js/k6js/pull/4) [`99b2b054e`](https://github.com/k6js/k6js/commit/99b2b054e3354cc3176f1e90b27c8dd5b0445936) Thanks [@gautamsi](https://github.com/gautamsi)! - Upgraded to keystone 28
+
 ## 0.4.0
 
 ### Minor Changes
