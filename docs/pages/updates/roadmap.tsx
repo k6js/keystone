@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx  */
 import { ComponentProps, Fragment, ReactNode } from 'react';
 import { jsx } from '@emotion/react';
@@ -8,6 +9,7 @@ import { Button } from '../../components/primitives/Button';
 import { Highlight } from '../../components/primitives/Highlight';
 import { Gradient } from '../../components/primitives/Gradient';
 import { Alert } from '../../components/primitives/Alert';
+import { Emoji } from '../../components/primitives/Emoji';
 import { Type } from '../../components/primitives/Type';
 import { ArrowR } from '../../components/icons/ArrowR';
 import { DocsPage } from '../../components/Page';
@@ -85,7 +87,7 @@ function TimelineWeAreHere() {
           width: arrowSize,
         })}
       />
-      We are here! 👋
+      We are here! <Emoji symbol="👋" alt="Hand waving" />
     </span>
   );
 }
@@ -186,7 +188,7 @@ export default function Roadmap() {
 
       <Type as="p" look="body18" margin="1rem 0">
         This means we're integrating feedback and tweaking our APIs before finalising our move from
-        v5 to v6, and publishing packages under the <InlineCode>@keystone-next</InlineCode> scope on
+        v5 to v6, and publishing packages under the <InlineCode>@keystone-6</InlineCode> scope on
         npm.
       </Type>
 
@@ -224,9 +226,8 @@ export default function Roadmap() {
           <TimelineWeAreHere />
           <TimelineMarker look="grad2" />
           <TimelineContent title="Community Preview" look="grad2">
-            We published the <strong>New Interfaces</strong> as{' '}
-            <InlineCode>@keystone-next</InlineCode> on npm, and have been iterating based on
-            internal & community feedback
+            We published the <strong>New Interfaces</strong> as <InlineCode>@keystone-6</InlineCode>{' '}
+            on npm, and have been iterating based on internal & community feedback
           </TimelineContent>
         </TimelineItem>
         <TimelineItem>

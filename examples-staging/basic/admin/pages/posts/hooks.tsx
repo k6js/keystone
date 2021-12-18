@@ -8,7 +8,7 @@ import { jsx, useTheme } from '@keystone-ui/core';
 // } from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
 
 import { Fragment } from 'react';
-import { useList } from '@keystone-next/keystone/admin-ui/context';
+import { useList } from '@keystone-6/core/admin-ui/context';
 
 export function ItemPageSidebar({ listKey, item }: any) {
   const { spacing } = useTheme();

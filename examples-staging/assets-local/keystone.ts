@@ -1,4 +1,4 @@
-import { config } from '@keystone-next/keystone';
+import { config } from '@keystone-6/core';
 import { lists } from './schema';
 
 export default config({
@@ -8,6 +8,9 @@ export default config({
   },
   lists,
   images: {
+    upload: 'local',
+  },
+  files: {
     upload: 'local',
   },
 });

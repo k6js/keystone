@@ -50,7 +50,7 @@ export function Footer() {
           css={mq({
             display: 'grid',
             gridTemplateColumns: ['1fr', '1fr 1fr 1fr 1fr', null, '1fr 1fr 1fr 1fr 23rem'],
-            gap: '1rem',
+            gap: '1.5rem',
             borderTop: '1px solid var(--border)',
             margin: 0,
             paddingTop: '3rem',
@@ -107,6 +107,11 @@ export function Footer() {
               <li>
                 <Link href="/docs/apis">
                   <a>API reference</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/branding">
+                  <a>Branding</a>
                 </Link>
               </li>
             </List>
@@ -240,7 +245,7 @@ export function Footer() {
           </Type> */}
           <Type look="body14" as="p" css={{ justifySelf: 'start' }}>
             Made in Australia <Emoji symbol="🇦🇺" alt="Australia" /> by{' '}
-            <a href="https://www.thinkmill.com.au" target="_blank">
+            <a href="https://www.thinkmill.com.au" target="_blank" rel="noopener noreferrer">
               Thinkmill
             </a>
             . Contributed to around the world <Emoji symbol="🌏" alt="Globe" />

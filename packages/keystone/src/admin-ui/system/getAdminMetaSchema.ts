@@ -5,7 +5,7 @@ import {
   AdminMetaRootVal,
   ListMetaRootVal,
   FieldMetaRootVal,
-  ItemRootValue,
+  BaseItem,
 } from '../../types';
 import { graphql as graphqlBoundToKeystoneContext } from '../..';
 
@@ -28,9 +28,8 @@ export function getAdminMetaSchema({
   lists: Record<string, InitialisedList>;
 }) {
   const isAccessAllowed =
-    config.session === undefined
-      ? undefined
-      : config.ui?.isAccessAllowed ?? (({ session }) => session !== undefined);
+    config.ui?.isAccessAllowed ??
+    (config.session === undefined ? undefined : ({ session }) => session !== undefined);
   const jsonScalar = graphqlBoundToKeystoneContext.JSON;
 
   const KeystoneAdminUIFieldMeta = graphql.object<FieldMetaRootVal>()({
@@ -405,7 +404,7 @@ function fakeAssert<T>(val: any): asserts val is T {}
 const fetchItemForItemViewFieldMode = extendContext(context => {
   type ListKey = string;
   type ItemId = string;
-  const lists = new Map<ListKey, Map<ItemId, Promise<ItemRootValue | null>>>();
+  const lists = new Map<ListKey, Map<ItemId, Promise<BaseItem | null>>>();
   return (listKey: ListKey, id: ItemId) => {
     if (!lists.has(listKey)) {
       lists.set(listKey, new Map());

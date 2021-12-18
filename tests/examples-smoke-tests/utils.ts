@@ -33,7 +33,11 @@ async function deleteAllData(projectDir: string) {
 
     let prisma = new PrismaClient();
 
-    await Promise.all(Object.values(prisma).map((x: any) => x?.deleteMany?.({})));
+    await prisma.$transaction(
+      Object.values(prisma)
+        .filter((x: any) => x?.deleteMany)
+        .map((x: any) => x?.deleteMany?.({}))
+    );
 
     await prisma.$disconnect();
   } finally {
@@ -82,7 +86,7 @@ export const exampleProjectTests = (
     });
 
     async function startKeystone(command: 'start' | 'dev') {
-      let keystoneProcess = execa('yarn', ['keystone-next', command], {
+      let keystoneProcess = execa('yarn', ['keystone', command], {
         cwd: projectDir,
         env: process.env,
       });

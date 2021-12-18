@@ -1,5 +1,5 @@
 import {
-  BaseGeneratedListTypes,
+  BaseListTypeInfo,
   FieldTypeFunc,
   CommonFieldConfig,
   fieldType,
@@ -61,10 +61,13 @@ type OneDbConfig = {
 
 type ManyDbConfig = {
   many: true;
+  db?: {
+    relationName?: string;
+  };
 };
 
-export type RelationshipFieldConfig<TGeneratedListTypes extends BaseGeneratedListTypes> =
-  CommonFieldConfig<TGeneratedListTypes> & {
+export type RelationshipFieldConfig<ListTypeInfo extends BaseListTypeInfo> =
+  CommonFieldConfig<ListTypeInfo> & {
     many?: boolean;
     ref: string;
     ui?: {
@@ -74,10 +77,10 @@ export type RelationshipFieldConfig<TGeneratedListTypes extends BaseGeneratedLis
     (SelectDisplayConfig | CardsDisplayConfig | CountDisplayConfig);
 
 export const relationship =
-  <TGeneratedListTypes extends BaseGeneratedListTypes>({
+  <ListTypeInfo extends BaseListTypeInfo>({
     ref,
     ...config
-  }: RelationshipFieldConfig<TGeneratedListTypes>): FieldTypeFunc =>
+  }: RelationshipFieldConfig<ListTypeInfo>): FieldTypeFunc<ListTypeInfo> =>
   meta => {
     const { many = false } = config;
     const [foreignListKey, foreignFieldKey] = ref.split('.');
@@ -156,6 +159,7 @@ export const relationship =
         mode: 'many',
         list: foreignListKey,
         field: foreignFieldKey,
+        relationName: config.db?.relationName,
       })({
         ...commonConfig,
         input: {

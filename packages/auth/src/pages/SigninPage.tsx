@@ -3,14 +3,15 @@
 
 import { useState, Fragment, FormEvent, useRef, useEffect } from 'react';
 
-import { jsx, H1, Stack, VisuallyHidden } from '@keystone-ui/core';
+import { jsx, H1, Stack, VisuallyHidden, Center } from '@keystone-ui/core';
 import { Button } from '@keystone-ui/button';
 import { TextInput } from '@keystone-ui/fields';
 import { Notice } from '@keystone-ui/notice';
 
-import { useMutation, gql } from '@keystone-next/keystone/admin-ui/apollo';
-import { useRawKeystone, useReinitContext } from '@keystone-next/keystone/admin-ui/context';
-import { useRouter } from '@keystone-next/keystone/admin-ui/router';
+import { useMutation, gql } from '@keystone-6/core/admin-ui/apollo';
+import { useRawKeystone, useReinitContext } from '@keystone-6/core/admin-ui/context';
+import { useRouter } from '@keystone-6/core/admin-ui/router';
+import { LoadingDots } from '@keystone-ui/loading';
 import { SigninContainer } from '../components/SigninContainer';
 
 type SigninPageProps = {
@@ -63,6 +64,15 @@ export const SigninPage = ({
       router.push((router.query.from as string | undefined) || '/');
     }
   }, [rawKeystone.authenticatedItem, router]);
+
+  if (rawKeystone.authenticatedItem.state === 'authenticated') {
+    return (
+      <Center fillView>
+        <LoadingDots label="Loading page" size="large" />
+      </Center>
+    );
+  }
+
   return (
     <SigninContainer>
       <Stack

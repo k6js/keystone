@@ -28,7 +28,7 @@ import { initialiseLists } from '../../lib/core/types-for-lists';
 import { printPrismaSchema } from '../../lib/core/prisma-schema';
 
 const devLoadingHTMLFilepath = path.join(
-  path.dirname(require.resolve('@keystone-next/keystone/package.json')),
+  path.dirname(require.resolve('@keystone-6/core/package.json')),
   'static',
   'dev-loading.html'
 );
@@ -97,7 +97,7 @@ exports.default = function (req, res) { return res.send(x.toString()) }
     let lastVersion = '';
     let lastError = undefined;
     const originalPrismaSchema = printPrismaSchema(
-      initialiseLists(config.lists, config.db.provider),
+      initialiseLists(config),
       config.db.provider,
       config.db.prismaPreviewFeatures
     );
@@ -132,12 +132,12 @@ exports.default = function (req, res) { return res.send(x.toString()) }
           const uninitializedConfig = (await apiRouteModule.getConfig()).default;
           const newConfig = initConfig(uninitializedConfig);
           const newPrismaSchema = printPrismaSchema(
-            initialiseLists(newConfig.lists, newConfig.db.provider),
+            initialiseLists(newConfig),
             newConfig.db.provider,
             newConfig.db.prismaPreviewFeatures
           );
           if (originalPrismaSchema !== newPrismaSchema) {
-            console.log('Your prisma schema has changed, please restart Keystone');
+            console.log('🔄 Your prisma schema has changed, please restart Keystone');
             process.exit(1);
           }
 
