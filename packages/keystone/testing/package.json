@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-testing.cjs.js",
-  "module": "dist/k6js-ks-next-testing.esm.js"
+  "main": "dist/k6js-core-testing.cjs.js",
+  "module": "dist/k6js-core-testing.esm.js"
 }

@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-artifacts.cjs.js",
-  "module": "dist/k6js-ks-next-artifacts.esm.js"
+  "main": "dist/k6js-core-artifacts.cjs.js",
+  "module": "dist/k6js-core-artifacts.esm.js"
 }

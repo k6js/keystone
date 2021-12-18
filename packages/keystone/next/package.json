@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-next.cjs.js",
-  "module": "dist/k6js-ks-next-next.esm.js"
+  "main": "dist/k6js-core-next.cjs.js",
+  "module": "dist/k6js-core-next.esm.js"
 }

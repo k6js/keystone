@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-migrations.cjs.js",
-  "module": "dist/k6js-ks-next-migrations.esm.js"
+  "main": "dist/k6js-core-migrations.cjs.js",
+  "module": "dist/k6js-core-migrations.esm.js"
 }

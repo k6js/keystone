@@ -155,7 +155,7 @@
     ]
   },
   "resolutions": {
-    "@keystone-6/core": "npm:@k6js/ks-next@*",
+    "@keystone-6/core": "npm:@k6js/core@*",
     "babel-plugin-remove-graphql-queries": "2.7.2"
   },
   "engines": {

@@ -11,12 +11,12 @@
   "linked": [],
   "access": "public",
   "ignore": [
-    "@keystone-next/cloudinary",
-    "@keystone-next/example-*",
-    "@keystone-next/session-store-redis",
-    "@keystone-next/example-ecommerce",
-    "@keystone-next/examples-app-basic",
-    "@keystone-next/test-projects-*",
-    "@keystone-next/benchmarks-legacy"
+    "@keystone-6/cloudinary",
+    "@keystone-6/example-*",
+    "@keystone-6/session-store-redis",
+    "@keystone-6/example-ecommerce",
+    "@keystone-6/examples-app-basic",
+    "@keystone-6/test-projects-*",
+    "@keystone-6/benchmarks-legacy"
   ]
 }

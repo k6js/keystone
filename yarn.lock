@@ -2451,9 +2451,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@k6js/ks-next@workspace:packages/keystone, @keystone-6/core@npm:@k6js/ks-next@*":
+"@k6js/core@workspace:packages/keystone, @keystone-6/core@npm:@k6js/core@*":
   version: 0.0.0-use.local
-  resolution: "@k6js/ks-next@workspace:packages/keystone"
+  resolution: "@k6js/core@workspace:packages/keystone"
   dependencies:
     "@apollo/client": 3.4.17
     "@babel/core": ^7.16.0
@@ -2569,7 +2569,7 @@ __metadata:
   resolution: "@keystone-6/admin-ui-tests@workspace:tests/admin-ui-tests"
   dependencies:
     "@keystone-6/auth": "*"
-    "@keystone-6/core": "*"
+    "@keystone-6/core": ^1.0.0
     "@manypkg/find-root": ^1.1.0
     async-retry: ^1.3.3
     dotenv: ^10.0.0
@@ -2589,7 +2589,7 @@ __metadata:
   dependencies:
     "@hapi/iron": ^6.0.0
     "@keystone-6/auth": "*"
-    "@keystone-6/core": "*"
+    "@keystone-6/core": ^1.0.0
     "@keystone-6/fields-document": "*"
     apollo-server-types: ^3.4.0
     cookie-signature: ^1.1.0
@@ -2981,7 +2981,7 @@ __metadata:
     "@babel/runtime": ^7.16.3
     "@braintree/sanitize-url": ^5.0.2
     "@emotion/weak-memoize": ^0.2.5
-    "@keystone-6/core": "*"
+    "@keystone-6/core": ^1.0.0
     "@keystone-6/document-renderer": ^1.0.0
     "@keystone-ui/button": ^6.0.0
     "@keystone-ui/core": ^4.0.0

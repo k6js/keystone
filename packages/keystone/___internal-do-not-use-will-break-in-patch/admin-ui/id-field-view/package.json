@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-___internal-do-not-use-will-break-in-patch-admin-ui-id-field-view.cjs.js",
-  "module": "dist/k6js-ks-next-___internal-do-not-use-will-break-in-patch-admin-ui-id-field-view.esm.js"
+  "main": "dist/k6js-core-___internal-do-not-use-will-break-in-patch-admin-ui-id-field-view.cjs.js",
+  "module": "dist/k6js-core-___internal-do-not-use-will-break-in-patch-admin-ui-id-field-view.esm.js"
 }

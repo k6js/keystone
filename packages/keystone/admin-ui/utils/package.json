@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-admin-ui-utils.cjs.js",
-  "module": "dist/k6js-ks-next-admin-ui-utils.esm.js"
+  "main": "dist/k6js-core-admin-ui-utils.cjs.js",
+  "module": "dist/k6js-core-admin-ui-utils.esm.js"
 }

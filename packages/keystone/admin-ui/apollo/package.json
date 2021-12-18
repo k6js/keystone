@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-admin-ui-apollo.cjs.js",
-  "module": "dist/k6js-ks-next-admin-ui-apollo.esm.js"
+  "main": "dist/k6js-core-admin-ui-apollo.cjs.js",
+  "module": "dist/k6js-core-admin-ui-apollo.esm.js"
 }

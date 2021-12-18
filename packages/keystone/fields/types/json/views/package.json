@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-fields-types-json-views.cjs.js",
-  "module": "dist/k6js-ks-next-fields-types-json-views.esm.js"
+  "main": "dist/k6js-core-fields-types-json-views.cjs.js",
+  "module": "dist/k6js-core-fields-types-json-views.esm.js"
 }
