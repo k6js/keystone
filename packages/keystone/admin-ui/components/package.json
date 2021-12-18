@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-admin-ui-components.cjs.js",
-  "module": "dist/keystone-6-core-admin-ui-components.esm.js"
+  "main": "dist/k6js-ks-next-admin-ui-components.cjs.js",
+  "module": "dist/k6js-ks-next-admin-ui-components.esm.js"
 }

@@ -1,9 +1,9 @@
 {
-  "name": "@keystone-6/core",
-  "version": "1.0.0",
+  "name": "@k6js/ks-next",
+  "version": "0.5.0",
   "license": "MIT",
-  "main": "dist/keystone-6-core.cjs.js",
-  "module": "dist/keystone-6-core.esm.js",
+  "main": "dist/k6js-ks-next.cjs.js",
+  "module": "dist/k6js-ks-next.esm.js",
   "files": [
     "session",
     "bin",
@@ -13,7 +13,6 @@
     "next",
     "schema",
     "scripts",
-    "session",
     "dist",
     "static",
     "admin-ui",

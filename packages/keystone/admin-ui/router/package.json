@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-admin-ui-router.cjs.js",
-  "module": "dist/keystone-6-core-admin-ui-router.esm.js"
+  "main": "dist/k6js-ks-next-admin-ui-router.cjs.js",
+  "module": "dist/k6js-ks-next-admin-ui-router.esm.js"
 }

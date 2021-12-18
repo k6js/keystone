@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-fields.cjs.js",
-  "module": "dist/keystone-6-core-fields.esm.js"
+  "main": "dist/k6js-ks-next-fields.cjs.js",
+  "module": "dist/k6js-ks-next-fields.esm.js"
 }

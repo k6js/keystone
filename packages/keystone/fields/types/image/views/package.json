@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-fields-types-image-views.cjs.js",
-  "module": "dist/keystone-6-core-fields-types-image-views.esm.js"
+  "main": "dist/k6js-ks-next-fields-types-image-views.cjs.js",
+  "module": "dist/k6js-ks-next-fields-types-image-views.esm.js"
 }
