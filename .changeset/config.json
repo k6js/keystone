@@ -11,6 +11,7 @@
   "linked": [],
   "access": "public",
   "ignore": [
+    "@keystone-ui/*",
     "@keystone-6/cloudinary",
     "@keystone-6/example-*",
     "@keystone-6/session-store-redis",
