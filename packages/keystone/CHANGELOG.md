@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 1.0.0
+
+### Major Changes
+
+- [#6](https://github.com/k6js/k6js/pull/6) [`fb6af6f36`](https://github.com/k6js/k6js/commit/fb6af6f36489327915dc56257df73bdb4f238de5) Thanks [@gautamsi](https://github.com/gautamsi)! - General Availability in line with Keystone-6 general availability
+
 ## 0.5.0
 
 ### Minor Changes
