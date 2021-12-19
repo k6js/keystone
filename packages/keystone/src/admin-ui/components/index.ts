@@ -16,3 +16,10 @@ export type { NavigationProps } from '../../types';
 export { PageContainer } from './PageContainer';
 export { CreateItemDrawer } from './CreateItemDrawer';
 export { GraphQLErrorNotice } from './GraphQLErrorNotice';
+
+// exported for k6js
+
+export { Container } from './Container';
+export { Pagination, PaginationLabel } from './Pagination';
+export { SignoutButton } from './SignoutButton';
+export { UpdateItemsDrawer } from './UpdateItemsDrawer';
