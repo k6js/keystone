@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-types.cjs.js",
-  "module": "dist/k6js-ks-next-types.esm.js"
+  "main": "dist/k6js-core-types.cjs.js",
+  "module": "dist/k6js-core-types.esm.js"
 }

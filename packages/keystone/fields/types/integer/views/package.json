@@ -1,4 +1,4 @@
 {
-  "main": "dist/k6js-ks-next-fields-types-integer-views.cjs.js",
-  "module": "dist/k6js-ks-next-fields-types-integer-views.esm.js"
+  "main": "dist/k6js-core-fields-types-integer-views.cjs.js",
+  "module": "dist/k6js-core-fields-types-integer-views.esm.js"
 }

@@ -5,11 +5,11 @@ import { jsx, useTheme } from '@keystone-ui/core';
 import {
   getItemPage,
   ItemPageHooksProps,
-} from '@keystone-next/keystone/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
+} from '@keystone-6/core/___internal-do-not-use-will-break-in-patch/admin-ui/pages/ItemPage';
 
-// import { gql } from '@keystone-next/keystone';
+// import { gql } from '@keystone-6/core';
 import { Fragment } from 'react';
-import { useList } from '@keystone-next/keystone/admin-ui/context';
+import { useList } from '@keystone-6/core/admin-ui/context';
 
 const hooks: ItemPageHooksProps = {
   ItemPageSidebar({ listKey, item }) {
@@ -32,7 +32,7 @@ const hooks: ItemPageHooksProps = {
     const list = useList(listKey);
     return (
       <div>
-        {listKey} {`>`} {item?.[list.labelField] || item?.id}
+        {listKey} {`>>`} {item?.[list.labelField] || item?.id}
       </div>
     );
   },

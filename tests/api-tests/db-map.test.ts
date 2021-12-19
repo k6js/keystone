@@ -1,5 +1,5 @@
-import { list } from '@keystone-next/keystone';
-import { text } from '@keystone-next/keystone/fields';
+import { list } from '@keystone-6/core';
+import { text } from '@keystone-6/core/fields';
 import globby from 'globby';
 import { apiTestConfig, dbProvider, getPrismaSchema } from './utils';
 
@@ -28,9 +28,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model SomeList {
@@ -102,9 +101,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model SomeList {

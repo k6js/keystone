@@ -1,5 +1,5 @@
-import { list } from '@keystone-next/keystone';
-import { relationship } from '@keystone-next/keystone/fields';
+import { list } from '@keystone-6/core';
+import { relationship } from '@keystone-6/core/fields';
 import { apiTestConfig, dbProvider, getPrismaSchema } from '../utils';
 
 test('when not specifying foreignKey in a one to one relationship, the side is picked based on the list key + field key ordering', async () => {
@@ -29,9 +29,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model A {
@@ -73,9 +72,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model A {
@@ -117,9 +115,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model A {
@@ -234,9 +231,8 @@ datasource ${dbProvider} {
 }
 
 generator client {
-  provider   = "prisma-client-js"
-  output     = "node_modules/.prisma/client"
-  engineType = "binary"
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
 }
 
 model A {

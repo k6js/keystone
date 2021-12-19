@@ -1,14 +1,13 @@
 import { CacheHint } from 'apollo-server-types';
 import {
-  ItemRootValue,
-  TypesForList,
+  BaseItem,
+  GraphQLTypesForList,
   getGqlNames,
   NextFieldType,
-  BaseGeneratedListTypes,
-  ListInfo,
+  BaseListTypeInfo,
+  ListGraphQLTypes,
   ListHooks,
   KeystoneConfig,
-  DatabaseProvider,
   FindManyArgs,
   CacheHintArgs,
   MaybePromise,
@@ -30,14 +29,14 @@ import { assertFieldsValid } from './field-assertions';
 export type InitialisedField = Omit<NextFieldType, 'dbField' | 'access' | 'graphql'> & {
   dbField: ResolvedDBField;
   access: ResolvedFieldAccessControl;
-  hooks: FieldHooks<BaseGeneratedListTypes>;
+  hooks: FieldHooks<BaseListTypeInfo>;
   graphql: {
     isEnabled: {
       read: boolean;
       create: boolean;
       update: boolean;
-      filter: boolean | ((args: FilterOrderArgs) => MaybePromise<boolean>);
-      orderBy: boolean | ((args: FilterOrderArgs) => MaybePromise<boolean>);
+      filter: boolean | ((args: FilterOrderArgs<BaseListTypeInfo>) => MaybePromise<boolean>);
+      orderBy: boolean | ((args: FilterOrderArgs<BaseListTypeInfo>) => MaybePromise<boolean>);
     };
     cacheHint?: CacheHint | undefined;
   };
@@ -48,9 +47,9 @@ export type InitialisedList = {
   /** This will include the opposites to one-sided relationships */
   resolvedDbFields: Record<string, ResolvedDBField>;
   pluralGraphQLName: string;
-  types: TypesForList;
+  types: GraphQLTypesForList;
   access: ResolvedListAccessControl;
-  hooks: ListHooks<BaseGeneratedListTypes>;
+  hooks: ListHooks<BaseListTypeInfo>;
   adminUILabels: { label: string; singular: string; plural: string; path: string };
   cacheHint: ((args: CacheHintArgs) => CacheHint) | undefined;
   maxResults: number;
@@ -69,11 +68,10 @@ export type InitialisedList = {
   };
 };
 
-export function initialiseLists(
-  listsConfig: KeystoneConfig['lists'],
-  provider: DatabaseProvider
-): Record<string, InitialisedList> {
-  const listInfos: Record<string, ListInfo> = {};
+export function initialiseLists(config: KeystoneConfig): Record<string, InitialisedList> {
+  const listsConfig = config.lists;
+  const { provider } = config.db;
+  const listInfos: Record<string, ListGraphQLTypes> = {};
   const isEnabled: Record<
     string,
     {
@@ -82,8 +80,8 @@ export function initialiseLists(
       create: boolean;
       update: boolean;
       delete: boolean;
-      filter: boolean | ((args: FilterOrderArgs) => MaybePromise<boolean>);
-      orderBy: boolean | ((args: FilterOrderArgs) => MaybePromise<boolean>);
+      filter: boolean | ((args: FilterOrderArgs<BaseListTypeInfo>) => MaybePromise<boolean>);
+      orderBy: boolean | ((args: FilterOrderArgs<BaseListTypeInfo>) => MaybePromise<boolean>);
     }
   > = {};
 
@@ -144,7 +142,7 @@ export function initialiseLists(
       pluralGraphQLName: getNamesFromList(listKey, listConfig).pluralGraphQLName,
     });
 
-    let output = graphql.object<ItemRootValue>()({
+    let output = graphql.object<BaseItem>()({
       name: names.outputTypeName,
       fields: () => {
         const { fields } = lists[listKey];
@@ -200,7 +198,7 @@ export function initialiseLists(
       },
     });
 
-    const where: TypesForList['where'] = graphql.inputObject({
+    const where: GraphQLTypesForList['where'] = graphql.inputObject({
       name: names.whereInputName,
       fields: () => {
         const { fields } = lists[listKey];

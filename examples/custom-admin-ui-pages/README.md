@@ -5,7 +5,7 @@ It builds on the [Task Manager](../task-manager) starter project.
 
 ## Instructions
 
-To run this project, clone the Keystone repository locally then navigate to this directory and run:
+To run this project, clone the Keystone repository locally, run `yarn` at the root of the repository then navigate to this directory and run:
 
 ```shell
 yarn dev
@@ -35,7 +35,7 @@ route to the custom page included. For much more detail on adding custom navigat
 ## Layout components
 
 In order to help us build custom pages that _look_ and _feel_ like part of the Admin UI, Keystone exports the `PageContainer` component from
-the `@keystone-next/keystone/admin-ui/components` package.
+the `@keystone-6/core/admin-ui/components` package.
 
 ### PageContainer
 
@@ -51,7 +51,7 @@ type PageContainerProps = {
 To match the header style applied to all Admin UI standard pages, we use the `Heading` component from `@keystone-ui/core` as an `h3` element.
 
 ```tsx
-import { PageContainer } from '@keystone-next/keystone/admin-ui/component';
+import { PageContainer } from '@keystone-6/core/admin-ui/component';
 import { Heading } from '@keystone-ui/core';
 
 export default () => {

@@ -6,8 +6,8 @@ import { ReactEditor, RenderElementProps } from 'slate-react';
 import { Transforms, Editor } from 'slate';
 
 import { jsx } from '@keystone-ui/core';
-import { useKeystone } from '@keystone-next/keystone/admin-ui/context';
-import { RelationshipSelect } from '@keystone-next/keystone/fields/types/relationship/views/RelationshipSelect';
+import { useKeystone } from '@keystone-6/core/admin-ui/context';
+import { RelationshipSelect } from '@keystone-6/core/fields/types/relationship/views/RelationshipSelect';
 
 import { ToolbarButton } from './primitives';
 import { useStaticEditor } from './utils';
@@ -127,11 +127,12 @@ export function RelationshipElement({
                   ? null
                   : { id: element.data.id, label: element.data.label || element.data.id },
               onChange(value) {
-                Transforms.setNodes(
-                  editor,
-                  { data: value },
-                  { at: ReactEditor.findPath(editor, element) }
-                );
+                const at = ReactEditor.findPath(editor, element);
+                if (value === null) {
+                  Transforms.removeNodes(editor, { at });
+                } else {
+                  Transforms.setNodes(editor, { data: value }, { at });
+                }
               },
             }}
           />
