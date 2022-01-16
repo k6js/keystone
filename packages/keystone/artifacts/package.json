@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-artifacts.cjs.js",
-  "module": "dist/keystone-6-core-artifacts.esm.js"
+  "main": "dist/k6js-core-artifacts.cjs.js",
+  "module": "dist/k6js-core-artifacts.esm.js"
 }

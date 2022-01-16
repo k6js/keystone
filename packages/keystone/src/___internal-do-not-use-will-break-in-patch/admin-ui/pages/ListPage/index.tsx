@@ -1,7 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { Fragment, HTMLAttributes, ReactNode, useEffect, useMemo, useState } from 'react';
+import {
+  Fragment,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+  FunctionComponent,
+} from 'react';
 
 import { Button } from '@keystone-ui/button';
 import { Box, Center, Heading, jsx, Stack, useTheme } from '@keystone-ui/core';
@@ -23,6 +31,7 @@ import { CellLink } from '../../../../admin-ui/components';
 import { CreateItemDrawer } from '../../../../admin-ui/components/CreateItemDrawer';
 import { PageContainer, HEADER_HEIGHT } from '../../../../admin-ui/components/PageContainer';
 import { Pagination, PaginationLabel } from '../../../../admin-ui/components/Pagination';
+import { UpdateItemsDrawer } from '../../../../admin-ui/components/UpdateItemsDrawer';
 import { useList } from '../../../../admin-ui/context';
 import { Link, useRouter } from '../../../../admin-ui/router';
 import { FieldSelection } from './FieldSelection';
@@ -33,13 +42,25 @@ import { useFilters } from './useFilters';
 import { useSelectedFields } from './useSelectedFields';
 import { useSort } from './useSort';
 
-type ListPageProps = { listKey: string };
+export type ListPageHooksProp = Partial<{
+  ListPageHeader: FunctionComponent<{ listKey: string; }>;
+  ListPrimaryActions: FunctionComponent<{
+    listKey: string;
+    refetch: () => void;
+  }>;
+  ListSelectionActions: FunctionComponent<{
+    list: ListMeta;
+    selectedItems: ReadonlySet<string>;
+    refetch: () => void;
+  }>;
+}>;
+type ListPageProps = { listKey: string; hooks?: ListPageHooksProp; };
 
 type FetchedFieldMeta = {
   path: string;
   isOrderable: boolean;
   isFilterable: boolean;
-  listView: { fieldMode: 'read' | 'hidden' };
+  listView: { fieldMode: 'read' | 'hidden'; };
 };
 
 let listMetaGraphqlQuery: TypedDocumentNode<
@@ -54,7 +75,7 @@ let listMetaGraphqlQuery: TypedDocumentNode<
       };
     };
   },
-  { listKey: string }
+  { listKey: string; }
 > = gql`
   query ($listKey: String!) {
     keystone {
@@ -100,7 +121,7 @@ function useQueryParamsFromLocalStorage(listKey: string) {
         let parsed;
         try {
           parsed = JSON.parse(queryParamsFromLocalStorage!);
-        } catch (err) {}
+        } catch (err) { }
         if (parsed) {
           router.replace({ query: { ...router.query, ...parsed } });
         }
@@ -128,7 +149,7 @@ function useQueryParamsFromLocalStorage(listKey: string) {
 
 export const getListPage = (props: ListPageProps) => () => <ListPage {...props} />;
 
-const ListPage = ({ listKey }: ListPageProps) => {
+const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   const list = useList(listKey);
 
   const { query } = useRouter();
@@ -180,16 +201,14 @@ const ListPage = ({ listKey }: ListPageProps) => {
         })
         .join('\n');
       return gql`
-      query ($where: ${list.gqlNames.whereInputName}, $take: Int!, $skip: Int!, $orderBy: [${
-        list.gqlNames.listOrderName
-      }!]) {
-        items: ${
-          list.gqlNames.listQueryName
+      query ($where: ${list.gqlNames.whereInputName}, $take: Int!, $skip: Int!, $orderBy: [${list.gqlNames.listOrderName
+        }!]) {
+        items: ${list.gqlNames.listQueryName
         }(where: $where,take: $take, skip: $skip, orderBy: $orderBy) {
           ${
-            // TODO: maybe namespace all the fields instead of doing this
-            selectedFields.has('id') ? '' : 'id'
-          }
+        // TODO: maybe namespace all the fields instead of doing this
+        selectedFields.has('id') ? '' : 'id'
+        }
           ${selectedGqlFields}
         }
         count: ${list.gqlNames.listQueryCountName}(where: $where)
@@ -218,7 +237,7 @@ const ListPage = ({ listKey }: ListPageProps) => {
   const { data, error } = dataState;
 
   const dataGetter = makeDataGetter<
-    DeepNullable<{ count: number; items: { id: string; [key: string]: any }[] }>
+    DeepNullable<{ count: number; items: { id: string;[key: string]: any; }[]; }>
   >(data, error?.graphQLErrors);
 
   const [selectedItemsState, setSelectedItems] = useState(() => ({
@@ -242,7 +261,16 @@ const ListPage = ({ listKey }: ListPageProps) => {
   const showCreate = !(metaQuery.data?.keystone.adminMeta.list?.hideCreate ?? true) || null;
 
   return (
-    <PageContainer header={<ListPageHeader listKey={listKey} />} title={list.label}>
+    <PageContainer
+      header={
+        hooks.ListPageHeader ? (
+          <hooks.ListPageHeader listKey={listKey} />
+        ) : (
+          <ListPageHeader listKey={listKey} />
+        )
+      }
+      title={list.label}
+    >
       {metaQuery.error ? (
         // TODO: Show errors nicely and with information
         'Error...'
@@ -250,6 +278,9 @@ const ListPage = ({ listKey }: ListPageProps) => {
         <Fragment>
           <Stack across gap="medium" align="center" marginTop="xlarge">
             {showCreate && <CreateButton listKey={listKey} />}
+            {hooks.ListPrimaryActions && (
+              <hooks.ListPrimaryActions listKey={listKey} refetch={refetch} />
+            )}
             {data.count || filters.filters.length ? (
               <FilterAdd listKey={listKey} filterableFields={filterableFields} />
             ) : null}
@@ -272,13 +303,27 @@ const ListPage = ({ listKey }: ListPageProps) => {
                         <span css={{ marginRight: theme.spacing.small }}>
                           Selected {selectedItemsCount} of {data.items.length}
                         </span>
-                        {!(metaQuery.data?.keystone.adminMeta.list?.hideDelete ?? true) && (
-                          <DeleteManyButton
+                        <Stack across gap="small" align="center" marginTop="none">
+                          <UpdateManyButton
                             list={list}
                             selectedItems={selectedItems}
                             refetch={refetch}
                           />
-                        )}
+                          {!(metaQuery.data?.keystone.adminMeta.list?.hideDelete ?? true) && (
+                            <DeleteManyButton
+                              list={list}
+                              selectedItems={selectedItems}
+                              refetch={refetch}
+                            />
+                          )}
+                          {hooks.ListSelectionActions && (
+                            <hooks.ListSelectionActions
+                              list={list}
+                              selectedItems={selectedItems}
+                              refetch={refetch}
+                            />
+                          )}
+                        </Stack>
                       </Fragment>
                     );
                   }
@@ -335,7 +380,7 @@ const ListPage = ({ listKey }: ListPageProps) => {
   );
 };
 
-const CreateButton = ({ listKey }: { listKey: string }) => {
+const CreateButton = ({ listKey }: { listKey: string; }) => {
   const list = useList(listKey);
   const router = useRouter();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -368,7 +413,7 @@ const CreateButton = ({ listKey }: { listKey: string }) => {
   );
 };
 
-const ListPageHeader = ({ listKey }: { listKey: string }) => {
+const ListPageHeader = ({ listKey }: { listKey: string; }) => {
   const list = useList(listKey);
   return (
     <Fragment>
@@ -387,22 +432,23 @@ const ListPageHeader = ({ listKey }: { listKey: string }) => {
   );
 };
 
-const ResultsSummaryContainer = ({ children }: { children: ReactNode }) => (
-  <p
+const ResultsSummaryContainer = ({ children }: { children: ReactNode; }) => (
+  <div
     css={{
       // TODO: don't do this
       // (this is to make it so things don't move when a user selects an item)
       minHeight: 38,
-
+      marginTop: '1em',
+      marginBottom: '1em',
       display: 'flex',
       alignItems: 'center',
     }}
   >
     {children}
-  </p>
+  </div>
 );
 
-const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC' }) => {
+const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC'; }) => {
   const size = '0.25em';
   return (
     <span
@@ -421,6 +467,43 @@ const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC' }) => {
     />
   );
 };
+
+function UpdateManyButton({
+  selectedItems,
+  list,
+  refetch,
+}: {
+  selectedItems: ReadonlySet<string>;
+  list: ListMeta;
+  refetch: () => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Fragment>
+      <Button
+        tone="active"
+        onClick={async () => {
+          setIsOpen(true);
+        }}
+      >
+        Update
+      </Button>
+      <DrawerController isOpen={isOpen}>
+        <UpdateItemsDrawer
+          selectedItems={selectedItems}
+          listKey={list.key}
+          onUpdate={() => {
+            refetch();
+            setIsOpen(false);
+          }}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      </DrawerController>
+    </Fragment>
+  );
+}
 
 function DeleteManyButton({
   selectedItems,
@@ -512,9 +595,8 @@ function DeleteManyButton({
                 // Reduce error messages down to unique instances, and append to the toast as a message.
                 toasts.addToast({
                   tone: 'negative',
-                  title: `Failed to delete ${unsuccessfulItems} of ${
-                    data[list.gqlNames.deleteManyMutationName].length
-                  } ${list.plural}`,
+                  title: `Failed to delete ${unsuccessfulItems} of ${data[list.gqlNames.deleteManyMutationName].length
+                    } ${list.plural}`,
                   message: errors
                     .reduce((acc, error) => {
                       if (acc.indexOf(error.message) < 0) {
@@ -529,9 +611,8 @@ function DeleteManyButton({
               if (successfulItems) {
                 toasts.addToast({
                   tone: 'positive',
-                  title: `Deleted ${successfulItems} of ${
-                    data[list.gqlNames.deleteManyMutationName].length
-                  } ${list.plural} successfully`,
+                  title: `Deleted ${successfulItems} of ${data[list.gqlNames.deleteManyMutationName].length
+                    } ${list.plural} successfully`,
                   message: successMessage,
                 });
               }
@@ -568,9 +649,9 @@ function ListTable({
 }: {
   selectedFields: ReturnType<typeof useSelectedFields>;
   listKey: string;
-  itemsGetter: DataGetter<DeepNullable<{ id: string; [key: string]: any }[]>>;
+  itemsGetter: DataGetter<DeepNullable<{ id: string;[key: string]: any; }[]>>;
   count: number;
-  sort: { field: string; direction: 'ASC' | 'DESC' } | null;
+  sort: { field: string; direction: 'ASC' | 'DESC'; } | null;
   currentPage: number;
   pageSize: number;
   selectedItems: ReadonlySet<string>;
@@ -742,9 +823,9 @@ function ListTable({
                         linkTo={
                           i === 0 && Cell.supportsLinkTo
                             ? {
-                                href: `/${list.path}/[id]`,
-                                as: `/${list.path}/${encodeURIComponent(itemId)}`,
-                              }
+                              href: `/${list.path}/[id]`,
+                              as: `/${list.path}/${encodeURIComponent(itemId)}`,
+                            }
                             : undefined
                         }
                       />
@@ -761,7 +842,7 @@ function ListTable({
   );
 }
 
-const TableContainer = ({ children }: { children: ReactNode }) => {
+const TableContainer = ({ children }: { children: ReactNode; }) => {
   return (
     <table
       css={{
@@ -777,7 +858,7 @@ const TableContainer = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const TableHeaderRow = ({ children }: { children: ReactNode }) => {
+const TableHeaderRow = ({ children }: { children: ReactNode; }) => {
   return (
     <thead>
       <tr>{children}</tr>

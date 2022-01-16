@@ -1,4 +1,4 @@
 {
-  "main": "dist/keystone-6-core-schema.cjs.js",
-  "module": "dist/keystone-6-core-schema.esm.js"
+  "main": "dist/k6js-core-schema.cjs.js",
+  "module": "dist/k6js-core-schema.esm.js"
 }

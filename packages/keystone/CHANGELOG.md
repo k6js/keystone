@@ -29,6 +29,50 @@
 
 ### Major Changes
 
+- [#6](https://github.com/k6js/k6js/pull/6) [`fb6af6f36`](https://github.com/k6js/k6js/commit/fb6af6f36489327915dc56257df73bdb4f238de5) Thanks [@gautamsi](https://github.com/gautamsi)! - General Availability in line with Keystone-6 general availability
+
+## 0.5.0
+
+### Minor Changes
+
+- [#4](https://github.com/k6js/k6js/pull/4) [`99b2b054e`](https://github.com/k6js/k6js/commit/99b2b054e3354cc3176f1e90b27c8dd5b0445936) Thanks [@gautamsi](https://github.com/gautamsi)! - Upgraded to keystone 28
+
+## 0.4.0
+
+### Minor Changes
+
+- [`dd1223c93`](https://github.com/k6js/k6js/commit/dd1223c93181d6b859a37529008dfb0454755e3b) Thanks [@gautamsi](https://github.com/gautamsi)! - using yarn 3. reverted most changes to take advantage of resolutions instead of patching several packages.
+
+## 0.3.0
+
+### Minor Changes
+
+- bring in latest keystone 27 changes
+
+## 0.2.0
+
+### Minor Changes
+
+- [#3](https://github.com/k6js/k6js/pull/3) [`6a935cab0`](https://github.com/k6js/k6js/commit/6a935cab0ffd8a08d68b04eb368b08f955a21e59) Thanks [@gautamsi](https://github.com/gautamsi)! - Added various UI hooks, see code for how to use them.
+
+* [#2](https://github.com/k6js/k6js/pull/2) [`4a7b27539`](https://github.com/k6js/k6js/commit/4a7b2753920a3b736a31d6b27093095144c3a4bd) Thanks [@gautamsi](https://github.com/gautamsi)! - Added support for updating multiple items in admin ui. You can select multiple item and select fiedls to update.
+
+## 0.1.0
+
+### Minor Changes
+
+- [#1](https://github.com/k6js/k6js/pull/1) [`cd1777d14`](https://github.com/k6js/k6js/commit/cd1777d1468188fe3c32abd6229ee5f873d452f2) Thanks [@gautamsi](https://github.com/gautamsi)! - Initial release to keep up with Keystone 6
+
+  Notable changes
+
+  - rename packages
+  - test them with example project
+  - future ready with community PR
+
+## 1.0.0
+
+### Major Changes
+
 - [#7005](https://github.com/keystonejs/keystone/pull/7005) [`7dddbe0fd`](https://github.com/keystonejs/keystone/commit/7dddbe0fd5b42a2596ba4dc0bbe1813cb54571c7) Thanks [@gwyneplaine](https://github.com/gwyneplaine)! - Change cli command from `keystone-next` to `keystone`
 
 * [#7028](https://github.com/keystonejs/keystone/pull/7028) [`3c7a581c1`](https://github.com/keystonejs/keystone/commit/3c7a581c1e53ae49c9f74509de3927ebf2703bde) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Released Keystone 6
