@@ -133,9 +133,9 @@ export const query = createQueryAPI(keystoneConfig, PrismaClient);
 `;
 
 const nodeAPIDTS = `import { KeystoneListsAPI } from '@keystone-6/core/types';
-import { KeystoneListsTypeInfo } from './types';
+import { Context } from './types';
 
-export const query: KeystoneListsAPI<KeystoneListsTypeInfo>;`;
+export const query: Context['query'];`;
 
 const makeVercelIncludeTheSQLiteDB = (
   cwd: string,
@@ -185,12 +185,11 @@ export async function generateNodeModulesArtifactsWithoutPrismaClient(
 ) {
   const lists = initialiseLists(config);
 
-  const printedSchema = printSchema(graphQLSchema);
   const dotKeystoneDir = path.join(cwd, 'node_modules/.keystone');
   await Promise.all([
     fs.outputFile(
       path.join(dotKeystoneDir, 'types.d.ts'),
-      printGeneratedTypes(printedSchema, graphQLSchema, lists)
+      printGeneratedTypes(graphQLSchema, lists)
     ),
     fs.outputFile(path.join(dotKeystoneDir, 'types.js'), ''),
     ...(config.experimental?.generateNodeAPI

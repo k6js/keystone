@@ -1,5 +1,7 @@
 ## Feature Example - Using Nexus to extend the GraphQL API
 
+![KeystoneJS and Nexus logos](keystone-nexus.png)
+
 This project demonstrates how to use [Nexus](https://nexusjs.org) to extend the GraphQL API provided by Keystone with custom queries and mutations. It builds on the [Blog](../blog) starter project.
 
 ## Instructions
@@ -27,6 +29,6 @@ The resulting schema is then merged into Keystone's schema using [`@graphql-tool
 
 Ideally, we could tell Nexus about the GraphQL types Keystone generates so you could write Nexus fields that return Keystone types. Making this work requires more research, so the example currently creates a separate `NexusPost` type and uses Prisma to query posts from the database.
 
-There's also a Prisma plugin for Nexus in development here: https://github.com/prisma/nexus-prisma
+There's also a Prisma plugin for Nexus in development here: <https://github.com/prisma/nexus-prisma>
 
 When it's ready, it would make a good addition to this example (showing how to integrate the Prisma plugin with the Keystone-generated Prisma schema to auto-generate Nexus schema)
