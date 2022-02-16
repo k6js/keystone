@@ -96,9 +96,8 @@ export function UpdateItemsDrawer({
 
   return (
     <Drawer
-      title={`Update ${selectedItems.size} ${
-        selectedItems.size === 1 ? list.singular : list.plural
-      }`}
+      title={`Update ${selectedItems.size} ${selectedItems.size === 1 ? list.singular : list.plural
+        }`}
       width="narrow"
       actions={{
         confirm: {
@@ -114,7 +113,9 @@ export function UpdateItemsDrawer({
             Object.keys(renderedFields).forEach(fieldPath => {
               const { controller } = list.fields[fieldPath];
               const serialized = controller.serialize(value[fieldPath].value);
-              if (!isDeepEqual(serialized, controller.serialize(controller.defaultValue))) {
+              if (!isDeepEqual(serialized, controller.serialize(controller.deserialize({
+                [fieldPath]: undefined,
+              })))) {
                 Object.assign(data, serialized);
               }
             });
@@ -132,7 +133,7 @@ export function UpdateItemsDrawer({
                   tone: 'positive',
                 });
               })
-              .catch(() => {});
+              .catch(() => { });
           },
         },
         cancel: {
