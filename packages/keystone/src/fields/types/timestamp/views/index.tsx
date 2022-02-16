@@ -256,5 +256,75 @@ export const controller = (
       return { [config.path]: null };
     },
     validate: value => validate(value, config.fieldMeta, config.label) === undefined,
+    filter: {
+      Filter(props) {
+        return (
+          <TextInput
+            onChange={event => {
+              props.onChange(event.target.value);
+            }}
+            value={props.value}
+            autoFocus={props.autoFocus}
+          />
+        );
+      },
+
+      graphql: ({ type, value }) => {
+        const valueWithoutWhitespace = value.replace(/\s/g, '');
+        const parsed =
+          type === 'in' || type === 'not_in'
+            ? valueWithoutWhitespace.split(',')
+            : valueWithoutWhitespace;
+        if (type === 'not') {
+          return { [config.path]: { not: { equals: parsed } } };
+        }
+        const key = type === 'is' ? 'equals' : type === 'not_in' ? 'notIn' : type;
+        return { [config.path]: { [key]: parsed } };
+      },
+      Label({ label, value, type }) {
+        let renderedValue = value;
+        if (['in', 'not_in'].includes(type)) {
+          renderedValue = value
+            .split(',')
+            .map(value => value.trim())
+            .join(', ');
+        }
+        return `${label.toLowerCase()}: ${renderedValue}`;
+      },
+      types: {
+        is: {
+          label: 'Is exactly',
+          initialValue: '',
+        },
+        not: {
+          label: 'Is not exactly',
+          initialValue: '',
+        },
+        gt: {
+          label: 'Is greater than',
+          initialValue: '',
+        },
+        lt: {
+          label: 'Is less than',
+          initialValue: '',
+        },
+        gte: {
+          label: 'Is greater than or equal to',
+          initialValue: '',
+        },
+        lte: {
+          label: 'Is less than or equal to',
+          initialValue: '',
+        },
+        in: {
+          label: 'Is one of',
+          initialValue: '',
+        },
+        not_in: {
+          label: 'Is not one of',
+          initialValue: '',
+        },
+      },
+    },
   };
 };
