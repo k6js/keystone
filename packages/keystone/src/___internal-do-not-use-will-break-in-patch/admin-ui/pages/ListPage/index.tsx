@@ -43,7 +43,7 @@ import { useSelectedFields } from './useSelectedFields';
 import { useSort } from './useSort';
 
 export type ListPageHooksProp = Partial<{
-  ListPageHeader: FunctionComponent<{ listKey: string; }>;
+  ListPageHeader: FunctionComponent<{ listKey: string }>;
   ListPrimaryActions: FunctionComponent<{
     listKey: string;
     refetch: () => void;
@@ -54,13 +54,13 @@ export type ListPageHooksProp = Partial<{
     refetch: () => void;
   }>;
 }>;
-type ListPageProps = { listKey: string; hooks?: ListPageHooksProp; };
+type ListPageProps = { listKey: string; hooks?: ListPageHooksProp };
 
 type FetchedFieldMeta = {
   path: string;
   isOrderable: boolean;
   isFilterable: boolean;
-  listView: { fieldMode: 'read' | 'hidden'; };
+  listView: { fieldMode: 'read' | 'hidden' };
 };
 
 let listMetaGraphqlQuery: TypedDocumentNode<
@@ -75,7 +75,7 @@ let listMetaGraphqlQuery: TypedDocumentNode<
       };
     };
   },
-  { listKey: string; }
+  { listKey: string }
 > = gql`
   query ($listKey: String!) {
     keystone {
@@ -121,7 +121,7 @@ function useQueryParamsFromLocalStorage(listKey: string) {
         let parsed;
         try {
           parsed = JSON.parse(queryParamsFromLocalStorage!);
-        } catch (err) { }
+        } catch (err) {}
         if (parsed) {
           router.replace({ query: { ...router.query, ...parsed } });
         }
@@ -237,7 +237,7 @@ const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   const { data, error } = dataState;
 
   const dataGetter = makeDataGetter<
-    DeepNullable<{ count: number; items: { id: string;[key: string]: any; }[]; }>
+    DeepNullable<{ count: number; items: { id: string; [key: string]: any; }[]; }>
   >(data, error?.graphQLErrors);
 
   const [selectedItemsState, setSelectedItems] = useState(() => ({
