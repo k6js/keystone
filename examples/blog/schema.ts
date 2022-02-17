@@ -11,6 +11,7 @@ export const lists = {
           { label: 'Draft', value: 'draft' },
           { label: 'Published', value: 'published' },
         ],
+        defaultValue: 'draft'
       }),
       content: text(),
       publishDate: timestamp(),
