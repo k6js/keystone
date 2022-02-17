@@ -1,5 +1,12 @@
 # @keystone-next/keystone
 
+## 1.0.2
+
+### Patch Changes
+
+- [#11](https://github.com/k6js/k6js/pull/11) [`089b352e5`](https://github.com/k6js/k6js/commit/089b352e5d335171576c97d642a21c0085513820) Thanks [@gautamsi](https://github.com/gautamsi)! - \* Added Filter for `timestamp` field.
+  - Fixed issues with UpdateItems drawer (multiple updated) to apply default value
+
 ## 1.0.1
 
 ### Patch Changes
@@ -74,7 +81,6 @@
 
 * [#7111](https://github.com/keystonejs/keystone/pull/7111) [`888cf021a`](https://github.com/keystonejs/keystone/commit/888cf021a1beee64937c00bc5b58f8b3628dbdd4) Thanks [@Noviny](https://github.com/Noviny)! - Differentiate types for the field `resolveInput` hook and the list `resolveInput` hook.
   `undefined` may be returned by field `resolveInput` hooks (indicates a no-op), but not for lists.
-
 
 ## 1.0.0
 
