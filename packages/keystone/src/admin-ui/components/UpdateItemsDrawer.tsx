@@ -96,8 +96,9 @@ export function UpdateItemsDrawer({
 
   return (
     <Drawer
-      title={`Update ${selectedItems.size} ${selectedItems.size === 1 ? list.singular : list.plural
-        }`}
+      title={`Update ${selectedItems.size} ${
+        selectedItems.size === 1 ? list.singular : list.plural
+      }`}
       width="narrow"
       actions={{
         confirm: {
@@ -133,7 +134,7 @@ export function UpdateItemsDrawer({
                   tone: 'positive',
                 });
               })
-              .catch(() => { });
+              .catch(() => {});
           },
         },
         cancel: {
