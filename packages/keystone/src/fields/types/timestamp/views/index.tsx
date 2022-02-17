@@ -1,6 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useState } from 'react';
+import * as chrono from 'chrono-node';
+import { format, parseISO } from 'date-fns';
 
 import { jsx, Inline, Stack, VisuallyHidden, Text } from '@keystone-ui/core';
 import { FieldContainer, FieldLabel, TextInput, DatePicker } from '@keystone-ui/fields';
@@ -258,12 +260,22 @@ export const controller = (
     validate: value => validate(value, config.fieldMeta, config.label) === undefined,
     filter: {
       Filter(props) {
+        let [value, setValue] = useState(format(parseISO(props.value), 'Pp'));
+
+        const parseDate = (value: string) => {
+          setValue(value);
+          let [parsedDate] = chrono.parse(value);
+          if (parsedDate === undefined) {
+            return;
+          }
+          props.onChange(parsedDate.date().toISOString());
+        };
         return (
           <TextInput
             onChange={event => {
-              props.onChange(event.target.value);
+              parseDate(event.target.value);
             }}
-            value={props.value}
+            value={value}
             autoFocus={props.autoFocus}
           />
         );
