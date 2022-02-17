@@ -114,7 +114,9 @@ export function UpdateItemsDrawer({
             Object.keys(renderedFields).forEach(fieldPath => {
               const { controller } = list.fields[fieldPath];
               const serialized = controller.serialize(value[fieldPath].value);
-              if (!isDeepEqual(serialized, controller.serialize(controller.defaultValue))) {
+              if (!isDeepEqual(serialized, controller.serialize(controller.deserialize({
+                [fieldPath]: undefined,
+              })))) {
                 Object.assign(data, serialized);
               }
             });

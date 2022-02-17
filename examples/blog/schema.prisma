@@ -14,7 +14,7 @@ generator client {
 model Post {
   id          String    @id @default(cuid())
   title       String    @default("")
-  status      String?
+  status      String?   @default("draft")
   content     String    @default("")
   publishDate DateTime?
   author      Author?   @relation("Post_author", fields: [authorId], references: [id])
