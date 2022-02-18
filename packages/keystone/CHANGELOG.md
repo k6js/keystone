@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 1.0.3
+
+### Patch Changes
+
+- [`b8fa41925`](https://github.com/k6js/k6js/commit/b8fa41925bb370cb4e2f62af6ea5eeb7e4e34ca7) Thanks [@gautamsi](https://github.com/gautamsi)! - Fixed issues with float field filtering when the field is required with default value
+
 ## 1.0.2
 
 ### Patch Changes
