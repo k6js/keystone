@@ -1,5 +1,11 @@
 # @keystone-next/keystone
 
+## 1.0.4
+
+### Patch Changes
+
+- Fixed timestamp filtering!
+
 ## 1.0.3
 
 ### Patch Changes
