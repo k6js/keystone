@@ -4,8 +4,8 @@ import { useState } from 'react';
 import * as chrono from 'chrono-node';
 import { format, isValid, parseISO } from 'date-fns';
 
-import { jsx, Inline, Stack, VisuallyHidden, Text } from '@keystone-ui/core';
-import { FieldContainer, FieldLabel, TextInput, DatePicker } from '@keystone-ui/fields';
+import { jsx, Stack, Text } from '@keystone-ui/core';
+import { FieldContainer, FieldLabel, TextInput } from '@keystone-ui/fields';
 import {
   CardValueComponent,
   CellComponent,
@@ -14,14 +14,10 @@ import {
   FieldProps,
 } from '../../../../types';
 import { CellContainer, CellLink } from '../../../../admin-ui/components';
-import { useFormattedInput } from '../../integer/views/utils';
 import {
-  constructTimestamp,
   deconstructTimestamp,
   formatOutput,
   Value,
-  parseTime,
-  formatTime,
 } from './utils';
 
 export const Field = ({
@@ -29,111 +25,57 @@ export const Field = ({
   value,
   onChange,
   forceValidation,
+  autoFocus,
 }: FieldProps<typeof controller>) => {
-  const [touchedFirstInput, setTouchedFirstInput] = useState(false);
-  const [touchedSecondInput, setTouchedSecondInput] = useState(false);
-  const showValidation = (touchedFirstInput && touchedSecondInput) || forceValidation;
+  const [touchedInput, setTouchedInput] = useState(false);
+  const showValidation = touchedInput || forceValidation;
 
   const validationMessages = showValidation
     ? validate(value, field.fieldMeta, field.label)
     : undefined;
 
-  const timeInputProps = useFormattedInput<{ kind: 'parsed'; value: string | null }>(
-    {
-      format({ value }) {
-        if (value === null) {
-          return '';
-        }
-        return formatTime(value);
-      },
-      parse(value) {
-        value = value.trim();
-        if (value === '') {
-          return { kind: 'parsed', value: null };
-        }
-        const parsed = parseTime(value);
-        if (parsed !== undefined) {
-          return { kind: 'parsed', value: parsed };
-        }
-        return value;
-      },
-    },
-    {
-      value: value.value.timeValue,
-      onChange(timeValue) {
-        onChange?.({
-          ...value,
-          value: { ...value.value, timeValue },
-        });
-      },
-      onBlur() {
-        setTouchedSecondInput(true);
-      },
-    }
-  );
+  const propValue = !isValid(parseISO(value.value)) ? '' : format(parseISO(value.value), 'Pp');
+  const [dateValue, setDateValue] = useState<string>(propValue);
+
+  const parseDate = (dateText: string) => {
+    setDateValue(dateText);
+    let [parsedDate] = chrono.parse(dateText);
+    onChange && onChange({ ...value, value: parsedDate?.date().toISOString() });
+  };
 
   return (
     <FieldContainer as="fieldset">
       <Stack>
         <FieldLabel as="legend">{field.label}</FieldLabel>
         {onChange ? (
-          <Inline gap="small">
-            <Stack>
-              <DatePicker
-                onUpdate={date => {
-                  onChange({
-                    ...value,
-                    value: {
-                      dateValue: date,
-                      timeValue:
-                        typeof value.value.timeValue === 'object' &&
-                        value.value.timeValue.value === null
-                          ? { kind: 'parsed', value: '00:00:00.000' }
-                          : value.value.timeValue,
-                    },
-                  });
-                }}
-                onClear={() => {
-                  onChange({ ...value, value: { ...value.value, dateValue: null } });
-                }}
-                onBlur={() => setTouchedFirstInput(true)}
-                value={value.value.dateValue ?? ''}
-              />
-              {validationMessages?.date && (
-                <Text color="red600" size="small">
-                  {validationMessages.date}
-                </Text>
-              )}
-            </Stack>
-            <Stack>
-              <VisuallyHidden
-                as="label"
-                htmlFor={`${field.path}--time-input`}
-              >{`${field.label} time field`}</VisuallyHidden>
-              <TextInput
-                id={`${field.path}--time-input`}
-                {...timeInputProps}
-                disabled={onChange === undefined}
-                placeholder="00:00"
-              />
-              {validationMessages?.time && (
-                <Text color="red600" size="small">
-                  {validationMessages.time}
-                </Text>
-              )}
-            </Stack>
-          </Inline>
+          <Stack>
+            <TextInput
+              onChange={event => {
+                parseDate(event.target.value);
+              }}
+              onBlur={() => {
+                let [parsedDate] = chrono.parse(value.value ?? '');
+                if (parsedDate === undefined) {
+                  onChange({ ...value, value: '' });
+                  setDateValue('');
+                }
+                parsedDate && setDateValue(format(parsedDate?.date(), 'Pp'));
+                setTouchedInput(true);
+              }}
+              value={dateValue ?? ''}
+              autoFocus={autoFocus}
+            />
+            {validationMessages?.date && (
+              <Text color="red600" size="small">
+                {validationMessages.date}
+              </Text>
+            )}
+          </Stack>
+
         ) : (
-          value.value.dateValue !== null &&
-          typeof value.value.timeValue === 'object' &&
-          value.value.timeValue.value !== null && (
+          value.value !== null && (
             <Text>
-              {formatOutput(
-                constructTimestamp({
-                  dateValue: value.value.dateValue,
-                  timeValue: value.value.timeValue.value,
-                })
-              )}
+              {formatOutput(format(parseISO(value.value), 'Pp'))}
             </Text>
           )
         )}
@@ -141,8 +83,8 @@ export const Field = ({
           typeof field.fieldMeta.defaultValue !== 'string' &&
           field.fieldMeta.defaultValue?.kind === 'now') ||
           field.fieldMeta.updatedAt) && (
-          <Text>When this item is saved, this field will be set to the current date and time</Text>
-        )}
+            <Text>When this item is saved, this field will be set to the current date and time</Text>
+          )}
       </Stack>
     </FieldContainer>
   );
@@ -154,15 +96,15 @@ function validate(
   label: string
 ):
   | {
-      time?: string;
-      date?: string;
-    }
+    time?: string;
+    date?: string;
+  }
   | undefined {
   const val = value.value;
-  const hasDateValue = val.dateValue !== null;
-  const hasTimeValue = typeof val.timeValue === 'string' || typeof val.timeValue.value === 'string';
+  // const hasDateValue = val.dateValue !== null;
+  // const hasTimeValue = typeof val.timeValue === 'string' || typeof val.timeValue.value === 'string';
 
-  const isValueEmpty = !hasDateValue && !hasTimeValue;
+  const isValueEmpty = !val;
   // if we recieve null initially on the item view and the current value is null,
   // we should always allow saving it because:
   // - the value might be null in the database and we don't want to prevent saving the whole item because of that
@@ -184,20 +126,20 @@ function validate(
     return { date: `${label} is required` };
   }
 
-  if (hasDateValue && !hasTimeValue) {
-    return { time: `${label} requires a time to be provided` };
-  }
-  const timeError =
-    typeof val.timeValue === 'string'
-      ? `${label} requires a valid time in the format hh:mm`
-      : undefined;
-  if (hasTimeValue && !hasDateValue) {
-    return { date: `${label} requires a date to be selected`, time: timeError };
-  }
+  // if (hasDateValue && !hasTimeValue) {
+  //   return { time: `${label} requires a time to be provided` };
+  // }
+  // const timeError =
+  //   typeof val.timeValue === 'string'
+  //     ? `${label} requires a valid time in the format hh:mm`
+  //     : undefined;
+  // if (hasTimeValue && !hasDateValue) {
+  //   return { date: `${label} requires a date to be selected`, time: timeError };
+  // }
 
-  if (timeError) {
-    return { time: timeError };
-  }
+  // if (timeError) {
+  //   return { time: timeError };
+  // }
   return undefined;
 }
 
@@ -221,13 +163,13 @@ export const CardValue: CardValueComponent = ({ item, field }) => {
 };
 
 export type TimestampFieldMeta = {
-  defaultValue: string | { kind: 'now' } | null;
+  defaultValue: string | { kind: 'now'; } | null;
   updatedAt: boolean;
   isRequired: boolean;
 };
 export const controller = (
   config: FieldControllerConfig<TimestampFieldMeta>
-): FieldController<Value, string> & { fieldMeta: TimestampFieldMeta } => {
+): FieldController<Value, string> & { fieldMeta: TimestampFieldMeta; } => {
   return {
     path: config.path,
     label: config.label,
@@ -237,8 +179,8 @@ export const controller = (
       kind: 'create',
       value:
         typeof config.fieldMeta.defaultValue === 'string'
-          ? deconstructTimestamp(config.fieldMeta.defaultValue)
-          : { dateValue: null, timeValue: { kind: 'parsed', value: null } },
+          ? deconstructTimestamp(config.fieldMeta.defaultValue) : ''
+      // : { dateValue: null, timeValue: { kind: 'parsed', value: null } },
     },
     deserialize: data => {
       const value = data[config.path];
@@ -246,14 +188,17 @@ export const controller = (
         kind: 'update',
         initial: data[config.path],
         value: value
-          ? deconstructTimestamp(value)
-          : { dateValue: null, timeValue: { kind: 'parsed', value: null } },
+        // ? deconstructTimestamp(value)
+        // : { dateValue: null, timeValue: { kind: 'parsed', value: null } },
       };
     },
-    serialize: ({ value: { dateValue, timeValue } }) => {
-      if (dateValue && typeof timeValue === 'object' && timeValue.value !== null) {
-        let formattedDate = constructTimestamp({ dateValue, timeValue: timeValue.value });
-        return { [config.path]: formattedDate };
+    serialize: ({ value }) => {
+      // if (dateValue && typeof timeValue === 'object' && timeValue.value !== null) {
+      //   let formattedDate = constructTimestamp({ dateValue, timeValue: timeValue.value });
+      //   return { [config.path]: formattedDate };
+      // }
+      if (value) {
+        return { [config.path]: new Date(value) };
       }
       return { [config.path]: null };
     },
