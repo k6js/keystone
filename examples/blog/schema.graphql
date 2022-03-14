@@ -30,7 +30,7 @@ input PostWhereInput {
   title: StringFilter
   status: PostStatusTypeNullableFilter
   content: StringFilter
-  publishDate: DateTimeNullableFilter
+  publishDate: DateTimeFilter
   author: AuthorWhereInput
 }
 
@@ -80,7 +80,7 @@ input PostStatusTypeNullableFilter {
   not: PostStatusTypeNullableFilter
 }
 
-input DateTimeNullableFilter {
+input DateTimeFilter {
   equals: DateTime
   in: [DateTime!]
   notIn: [DateTime!]
@@ -88,7 +88,7 @@ input DateTimeNullableFilter {
   lte: DateTime
   gt: DateTime
   gte: DateTime
-  not: DateTimeNullableFilter
+  not: DateTimeFilter
 }
 
 input PostOrderByInput {

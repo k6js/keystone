@@ -37,11 +37,12 @@ export function constructTimestamp({
   return new Date(`${dateValue}T${timeValue}`).toISOString();
 }
 
-export function deconstructTimestamp(value: string): InnerValue {
-  return {
-    dateValue: formatISO(new Date(value), { representation: 'date' }),
-    timeValue: { kind: 'parsed', value: formatFullTime(new Date(value)) },
-  };
+export function deconstructTimestamp(value: string): string {
+  return formatISO(new Date(value), { representation: 'date' })
+  // return {
+  //   dateValue: formatISO(new Date(value), { representation: 'date' }),
+  //   timeValue: { kind: 'parsed', value: formatFullTime(new Date(value)) },
+  // };
 }
 
 export function formatOutput(value: string | null) {
@@ -58,10 +59,10 @@ export type InnerValue = {
 export type Value =
   | {
       kind: 'create';
-      value: InnerValue;
+      value: string;
     }
   | {
       kind: 'update';
-      value: InnerValue;
+      value: string;
       initial: string | null;
     };
