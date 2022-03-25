@@ -14,5 +14,7 @@ export type { NavigationProps } from '../../types';
 
 // CUSTOM PAGE BUILDING UTILITIES
 export { PageContainer } from './PageContainer';
+export { Pagination, PaginationLabel } from './Pagination';
 export { CreateItemDrawer } from './CreateItemDrawer';
+export { UpdateItemsDrawer } from './UpdateItemsDrawer';
 export { GraphQLErrorNotice } from './GraphQLErrorNotice';
