@@ -26,6 +26,75 @@
   - @keystone-ui/fields@6.0.1
   - @keystone-ui/popover@5.0.1
 
+## 1.0.4
+
+### Patch Changes
+
+- Fixed timestamp filtering!
+
+## 1.0.3
+
+### Patch Changes
+
+- [`b8fa41925`](https://github.com/k6js/k6js/commit/b8fa41925bb370cb4e2f62af6ea5eeb7e4e34ca7) Thanks [@gautamsi](https://github.com/gautamsi)! - Fixed issues with float field filtering when the field is required with default value
+
+## 1.0.2
+
+### Patch Changes
+
+- [#11](https://github.com/k6js/k6js/pull/11) [`089b352e5`](https://github.com/k6js/k6js/commit/089b352e5d335171576c97d642a21c0085513820) Thanks [@gautamsi](https://github.com/gautamsi)! - \* Added Filter for `timestamp` field.
+  - Fixed issues with UpdateItems drawer (multiple updated) to apply default value
+
+## 1.0.1
+
+### Patch Changes
+
+- [#9](https://github.com/k6js/k6js/pull/9) [`9c34e4c63`](https://github.com/k6js/k6js/commit/9c34e4c632af99b4364048d2321732f8cf22bb60) Thanks [@gautamsi](https://github.com/gautamsi)! - update to @keystone-6/core@1.0.1
+
+## 1.0.0
+
+### Major Changes
+
+- [#6](https://github.com/k6js/k6js/pull/6) [`fb6af6f36`](https://github.com/k6js/k6js/commit/fb6af6f36489327915dc56257df73bdb4f238de5) Thanks [@gautamsi](https://github.com/gautamsi)! - General Availability in line with Keystone-6 general availability
+
+## 0.5.0
+
+### Minor Changes
+
+- [#4](https://github.com/k6js/k6js/pull/4) [`99b2b054e`](https://github.com/k6js/k6js/commit/99b2b054e3354cc3176f1e90b27c8dd5b0445936) Thanks [@gautamsi](https://github.com/gautamsi)! - Upgraded to keystone 28
+
+## 0.4.0
+
+### Minor Changes
+
+- [`dd1223c93`](https://github.com/k6js/k6js/commit/dd1223c93181d6b859a37529008dfb0454755e3b) Thanks [@gautamsi](https://github.com/gautamsi)! - using yarn 3. reverted most changes to take advantage of resolutions instead of patching several packages.
+
+## 0.3.0
+
+### Minor Changes
+
+- bring in latest keystone 27 changes
+
+## 0.2.0
+
+### Minor Changes
+
+- [#3](https://github.com/k6js/k6js/pull/3) [`6a935cab0`](https://github.com/k6js/k6js/commit/6a935cab0ffd8a08d68b04eb368b08f955a21e59) Thanks [@gautamsi](https://github.com/gautamsi)! - Added various UI hooks, see code for how to use them.
+
+* [#2](https://github.com/k6js/k6js/pull/2) [`4a7b27539`](https://github.com/k6js/k6js/commit/4a7b2753920a3b736a31d6b27093095144c3a4bd) Thanks [@gautamsi](https://github.com/gautamsi)! - Added support for updating multiple items in admin ui. You can select multiple item and select fiedls to update.
+
+## 0.1.0
+
+### Minor Changes
+
+- [#1](https://github.com/k6js/k6js/pull/1) [`cd1777d14`](https://github.com/k6js/k6js/commit/cd1777d1468188fe3c32abd6229ee5f873d452f2) Thanks [@gautamsi](https://github.com/gautamsi)! - Initial release to keep up with Keystone 6
+
+  Notable changes
+
+  - rename packages
+  - test them with example project
+  - future ready with community PR
+
 ## 1.0.1
 
 ### Patch Changes

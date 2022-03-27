@@ -14,6 +14,7 @@ import {
   useMemo,
   useRef,
   useState,
+  FunctionComponent,
 } from 'react';
 
 import { Button } from '@keystone-ui/button';
@@ -45,8 +46,15 @@ import { GraphQLErrorNotice } from '../../../../admin-ui/components/GraphQLError
 import { CreateItemDrawer } from '../../../../admin-ui/components/CreateItemDrawer';
 import { Container } from '../../../../admin-ui/components/Container';
 
+export type ItemPageHooksProps = Partial<{
+  ItemPageHeader: FunctionComponent<{ listKey: string; item: ItemData }>;
+  ItemPageSidebar: FunctionComponent<{ listKey: string; item: ItemData }>;
+  ItemPageActions: FunctionComponent<{ listKey: string; item: ItemData }>;
+}>;
+
 type ItemPageProps = {
   listKey: string;
+  hooks?: ItemPageHooksProps;
 };
 
 function useEventCallback<Func extends (...args: any) => any>(callback: Func): Func {
@@ -268,7 +276,7 @@ function DeleteButton({
 
 export const getItemPage = (props: ItemPageProps) => () => <ItemPage {...props} />;
 
-const ItemPage = ({ listKey }: ItemPageProps) => {
+const ItemPage = ({ listKey, hooks = {} }: ItemPageProps) => {
   const router = useRouter();
   const { id } = router.query;
   const list = useList(listKey);
@@ -399,6 +407,7 @@ const ItemPage = ({ listKey }: ItemPageProps) => {
                 ? 'Loading...'
                 : (data && data.item && (data.item[list.labelField] || data.item.id)) || id}
             </Heading>
+            {hooks.ItemPageHeader && <hooks.ItemPageHeader listKey={listKey} item={data?.item} />}
           </div>
           {!hideCreate && <CreateButton listKey={listKey} id={data.item.id} />}
         </Container>
@@ -467,6 +476,9 @@ const ItemPage = ({ listKey }: ItemPageProps) => {
                     )}
                   </Tooltip>
                 </div>
+                {hooks.ItemPageSidebar && (
+                  <hooks.ItemPageSidebar listKey={listKey} item={data?.item} />
+                )}
               </StickySidebar>
             </Fragment>
           )}
