@@ -60,7 +60,7 @@ export const NavItem = ({ href, children, isSelected: _isSelected }: NavItemProp
   );
 };
 
-const AuthenticatedItemDialog = ({ item }: { item: AuthenticatedItem | undefined }) => {
+export const AuthenticatedItemDialog = ({ item }: { item: AuthenticatedItem | undefined }) => {
   const { apiPath } = useKeystone();
   const { spacing, typography } = useTheme();
   return (
@@ -112,7 +112,7 @@ const AuthenticatedItemDialog = ({ item }: { item: AuthenticatedItem | undefined
   );
 };
 
-const PopoverLink = ({ children, ...props }: AllHTMLAttributes<HTMLAnchorElement>) => {
+export const PopoverLink = ({ children, ...props }: AllHTMLAttributes<HTMLAnchorElement>) => {
   const { typography } = useTheme();
 
   return (

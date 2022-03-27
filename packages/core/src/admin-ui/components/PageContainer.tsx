@@ -15,7 +15,7 @@ type PageContainerProps = {
 
 export const HEADER_HEIGHT = 80;
 
-const PageWrapper = (props: HTMLAttributes<HTMLElement>) => {
+export const PageWrapper = (props: HTMLAttributes<HTMLElement>) => {
   // const { colors } = useTheme();
   return (
     <Fragment>
@@ -36,7 +36,7 @@ const PageWrapper = (props: HTMLAttributes<HTMLElement>) => {
   );
 };
 
-const Sidebar = (props: HTMLAttributes<HTMLElement>) => {
+export const Sidebar = (props: HTMLAttributes<HTMLElement>) => {
   // const { colors } = useTheme();
 
   return (
@@ -52,7 +52,7 @@ const Sidebar = (props: HTMLAttributes<HTMLElement>) => {
   );
 };
 
-const Content = (props: HTMLAttributes<HTMLElement>) => {
+export const Content = (props: HTMLAttributes<HTMLElement>) => {
   const { colors, spacing } = useTheme();
 
   return (
