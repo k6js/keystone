@@ -260,7 +260,9 @@ export const controller = (
     validate: value => validate(value, config.fieldMeta, config.label) === undefined,
     filter: {
       Filter(props) {
-        const propValue = !isValid(parseISO(props.value)) ? '' : format(parseISO(props.value), 'Pp');
+        const propValue = !isValid(parseISO(props.value))
+          ? ''
+          : format(parseISO(props.value), 'Pp');
         let [value, setValue] = useState(propValue);
 
         const parseDate = (value: string) => {

@@ -201,14 +201,16 @@ const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
         })
         .join('\n');
       return gql`
-      query ($where: ${list.gqlNames.whereInputName}, $take: Int!, $skip: Int!, $orderBy: [${list.gqlNames.listOrderName
-        }!]) {
-        items: ${list.gqlNames.listQueryName
+      query ($where: ${list.gqlNames.whereInputName}, $take: Int!, $skip: Int!, $orderBy: [${
+        list.gqlNames.listOrderName
+      }!]) {
+        items: ${
+          list.gqlNames.listQueryName
         }(where: $where,take: $take, skip: $skip, orderBy: $orderBy) {
           ${
-        // TODO: maybe namespace all the fields instead of doing this
-        selectedFields.has('id') ? '' : 'id'
-        }
+            // TODO: maybe namespace all the fields instead of doing this
+            selectedFields.has('id') ? '' : 'id'
+          }
           ${selectedGqlFields}
         }
         count: ${list.gqlNames.listQueryCountName}(where: $where)
@@ -237,7 +239,7 @@ const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   const { data, error } = dataState;
 
   const dataGetter = makeDataGetter<
-    DeepNullable<{ count: number; items: { id: string; [key: string]: any; }[]; }>
+    DeepNullable<{ count: number; items: { id: string; [key: string]: any }[] }>
   >(data, error?.graphQLErrors);
 
   const [selectedItemsState, setSelectedItems] = useState(() => ({
@@ -380,7 +382,7 @@ const ListPage = ({ listKey, hooks = {} }: ListPageProps) => {
   );
 };
 
-const CreateButton = ({ listKey }: { listKey: string; }) => {
+const CreateButton = ({ listKey }: { listKey: string }) => {
   const list = useList(listKey);
   const router = useRouter();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -413,7 +415,7 @@ const CreateButton = ({ listKey }: { listKey: string; }) => {
   );
 };
 
-const ListPageHeader = ({ listKey }: { listKey: string; }) => {
+const ListPageHeader = ({ listKey }: { listKey: string }) => {
   const list = useList(listKey);
   return (
     <Fragment>
@@ -432,7 +434,7 @@ const ListPageHeader = ({ listKey }: { listKey: string; }) => {
   );
 };
 
-const ResultsSummaryContainer = ({ children }: { children: ReactNode; }) => (
+const ResultsSummaryContainer = ({ children }: { children: ReactNode }) => (
   <div
     css={{
       // TODO: don't do this
@@ -448,7 +450,7 @@ const ResultsSummaryContainer = ({ children }: { children: ReactNode; }) => (
   </div>
 );
 
-const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC'; }) => {
+const SortDirectionArrow = ({ direction }: { direction: 'ASC' | 'DESC' }) => {
   const size = '0.25em';
   return (
     <span
@@ -595,8 +597,9 @@ function DeleteManyButton({
                 // Reduce error messages down to unique instances, and append to the toast as a message.
                 toasts.addToast({
                   tone: 'negative',
-                  title: `Failed to delete ${unsuccessfulItems} of ${data[list.gqlNames.deleteManyMutationName].length
-                    } ${list.plural}`,
+                  title: `Failed to delete ${unsuccessfulItems} of ${
+                    data[list.gqlNames.deleteManyMutationName].length
+                  } ${list.plural}`,
                   message: errors
                     .reduce((acc, error) => {
                       if (acc.indexOf(error.message) < 0) {
@@ -611,8 +614,9 @@ function DeleteManyButton({
               if (successfulItems) {
                 toasts.addToast({
                   tone: 'positive',
-                  title: `Deleted ${successfulItems} of ${data[list.gqlNames.deleteManyMutationName].length
-                    } ${list.plural} successfully`,
+                  title: `Deleted ${successfulItems} of ${
+                    data[list.gqlNames.deleteManyMutationName].length
+                  } ${list.plural} successfully`,
                   message: successMessage,
                 });
               }
@@ -649,9 +653,9 @@ function ListTable({
 }: {
   selectedFields: ReturnType<typeof useSelectedFields>;
   listKey: string;
-  itemsGetter: DataGetter<DeepNullable<{ id: string;[key: string]: any; }[]>>;
+  itemsGetter: DataGetter<DeepNullable<{ id: string; [key: string]: any }[]>>;
   count: number;
-  sort: { field: string; direction: 'ASC' | 'DESC'; } | null;
+  sort: { field: string; direction: 'ASC' | 'DESC' } | null;
   currentPage: number;
   pageSize: number;
   selectedItems: ReadonlySet<string>;
@@ -824,9 +828,9 @@ function ListTable({
                         linkTo={
                           i === 0 && Cell.supportsLinkTo
                             ? {
-                              href: `/${list.path}/[id]`,
-                              as: `/${list.path}/${encodeURIComponent(itemId)}`,
-                            }
+                                href: `/${list.path}/[id]`,
+                                as: `/${list.path}/${encodeURIComponent(itemId)}`,
+                              }
                             : undefined
                         }
                       />
@@ -843,7 +847,7 @@ function ListTable({
   );
 }
 
-const TableContainer = ({ children }: { children: ReactNode; }) => {
+const TableContainer = ({ children }: { children: ReactNode }) => {
   return (
     <table
       css={{
@@ -859,7 +863,7 @@ const TableContainer = ({ children }: { children: ReactNode; }) => {
   );
 };
 
-const TableHeaderRow = ({ children }: { children: ReactNode; }) => {
+const TableHeaderRow = ({ children }: { children: ReactNode }) => {
   return (
     <thead>
       <tr>{children}</tr>
