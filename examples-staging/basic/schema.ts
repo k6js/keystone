@@ -153,17 +153,8 @@ export const lists: Keystone.Lists = {
         ui: { views: require.resolve('./admin/fieldViews/Content.tsx') },
         relationships: {
           mention: {
-            kind: 'inline',
             label: 'Mention',
             listKey: 'User',
-          },
-          featuredAuthors: {
-            kind: 'prop',
-            listKey: 'User',
-            many: true,
-            selection: `posts(take: 10) {
-            title
-          }`,
           },
         },
         formatting: true,
@@ -217,7 +208,7 @@ export const extendGraphqlSchema = graphQLSchemaExtension<Keystone.Context>({
     Mutation: {
       createRandomPosts(root, args, context) {
         const data = Array.from({ length: 238 }).map((x, i) => ({ title: `Post ${i}` }));
-        return context.query.Post.createMany({ data });
+        return context.db.Post.createMany({ data });
       },
     },
     Query: {

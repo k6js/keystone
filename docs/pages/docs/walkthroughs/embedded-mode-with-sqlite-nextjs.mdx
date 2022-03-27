@@ -6,7 +6,7 @@ import { RelatedContent } from '../../../components/RelatedContent';
 
 In this tutorial, we're going to show you how to embed Keystone and an SQLite database into a **Next.js app**.
 By the end, your app will have a queryable GraphQL endpoint, based on your Keystone schema, running live on Vercel (for free!).
-Content remains editable via the Admin UI in your development environment, with changes published being with each deployment of the app.
+Content remains editable via the Admin UI in your development environment, with changes being published with each deployment of the app.
 
 We’ll take advantage of a new way of working with Keystone where you can run it from the same place you keep your frontend code and commit everything to Git.
 
@@ -58,6 +58,8 @@ Delete the `/pages/api` directory. We’ll add a GraphQL API later in the tutori
    └── index.tsx
 ```
 
+It is recommended that you use the same major version of `next` as used internally by [keystone](https://github.com/keystonejs/keystone/blob/main/packages/core/package.json#L107).
+
 ### Start your local server
 
 Run `yarn dev` at the root of your project.
@@ -99,8 +101,9 @@ To create and edit blog records in Keystone’s Admin UI, add a `keystone.ts` [c
 
 import { config, list } from '@keystone-6/core';
 import { text } from '@keystone-6/core/fields';
+import { Lists } from '.keystone/types';
 
-const Post = list({
+const Post: Lists.Post = list({
   fields: {
     title: text({ validation: { isRequired: true } }),
     slug: text({ isIndexed: 'unique', isFilterable: true }),
@@ -181,37 +184,46 @@ In order to query Keystone content we need to use the [`getStaticProps`](https:/
 import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-// Import the generated Lists API from Keystone
+// Import the generated Lists API and types from Keystone
 import { query } from '.keystone/api';
+import { Lists } from '.keystone/types';
+
+type Post = {
+  id: string;
+  title: string;
+  slug: string;
+};
 
 // Home receives a `posts` prop from `getStaticProps` below
-export default function Home({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
-      <main style={{margin: "3rem"}}>
-      <h1>Hello World! 👋🏻 </h1>
-      <ul>
-        {/* Render each post with a link to the content page */}
-        {posts.map(post => (
-          <li key={post.id}>
-            <Link href={`/post/${post.slug}`}>
-              <a>{post.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <main style={{ margin: '3rem' }}>
+        <h1>Hello World! 👋🏻 </h1>
+        <ul>
+          {/* Render each post with a link to the content page */}
+          {posts.map(post => (
+            <li key={post.id}>
+              <Link href={`/post/${post.slug}`}>
+                <a>{post.title}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </main>
     </div>
-  )
+  );
 }
 
 // Here we use the Lists API to load all the posts we want to display
 // The return of this function is provided to the `Home` component
 export async function getStaticProps() {
-  const posts = await query.Post.findMany({ query: 'id title slug' });
-  return { props: { posts } };
+  const posts = await query.Post.findMany({ query: 'id title slug' }) as Post[];
+  return {
+    props: {
+      posts
+    }
+  };
 }
 ```
 
@@ -220,41 +232,42 @@ Now add a `/post` subdirectory in `/pages` and include the code below in `[slug]
 ```tsx
 // pages/post/[slug].tsx
 
-import {
-  GetStaticPathsResult,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from 'next';
+import { GetStaticPathsResult, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
-import { query } from '.keystone/api';
 
-export default function PostPage({
-  post,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+import { query } from '.keystone/api';
+import { Lists } from '.keystone/types';
+
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export default function PostPage({ post }: { post: Post }) {
   return (
     <div>
-      <main style={{margin: "3rem"}}>
-      <div>
-        <Link href="/">
-          <a>&larr; back home</a>
-        </Link>
-      </div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+      <main style={{ margin: '3rem' }}>
+        <div>
+          <Link href="/">
+            <a>&larr; back home</a>
+          </Link>
+        </div>
+        <h1>{post.title}</h1>
+        <p>{post.content}</p>
       </main>
     </div>
   );
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const posts = await query.Post.findMany({
+  const posts = (await query.Post.findMany({
     query: `slug`,
-  });
+  })) as { slug: string }[];
 
   const paths = posts
-    .map(post => post.slug)
-    .filter((slug): slug is string => !!slug)
-    .map(slug => `/post/${slug}`);
+    .filter(({ slug }) => !!slug)
+    .map(({ slug }) => `/post/${slug}`);
 
   return {
     paths,
@@ -262,13 +275,14 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   };
 }
 
-export async function getStaticProps({
-  params,
-}: GetStaticPropsContext) {
-  const post = await query.Post.findOne({
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const post = (await query.Post.findOne({
     where: { slug: params!.slug as string },
     query: 'id title content',
-  });
+  })) as Post | null;
+  if (!post) {
+    return { notFound: true };
+  }
   return { props: { post } };
 }
 ```

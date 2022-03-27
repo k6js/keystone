@@ -29,38 +29,35 @@ function getOptions(
   relationships: Relationships
 ): Option[] {
   const options: (Option | boolean)[] = [
-    ...Object.entries(relationships)
-      .filter(
-        (x): x is [string, Extract<Relationships[string], { kind: 'inline' }>] =>
-          x[1].kind === 'inline'
-      )
-      .map(([relationship, { label }]) => ({
-        label,
-        insert: (editor: Editor) => {
-          Transforms.insertNodes(editor, {
-            type: 'relationship',
-            relationship,
-            data: null,
-            children: [{ text: '' }],
-          });
-        },
-      })),
-    ...Object.keys(componentBlocks).map(key => ({
-      label: componentBlocks[key].label,
+    ...Object.entries(relationships).map(([relationship, { label }]) => ({
+      label,
       insert: (editor: Editor) => {
-        insertComponentBlock(editor, componentBlocks, key, relationships);
-      },
-    })),
-    ...toolbarState.textStyles.allowedHeadingLevels.map(level => ({
-      label: `Heading ${level}`,
-      insert(editor: Editor) {
-        insertNodesButReplaceIfSelectionIsAtEmptyParagraphOrHeading(editor, {
-          type: 'heading',
-          level,
+        Transforms.insertNodes(editor, {
+          type: 'relationship',
+          relationship,
+          data: null,
           children: [{ text: '' }],
         });
       },
     })),
+    ...Object.keys(componentBlocks).map(key => ({
+      label: componentBlocks[key].label,
+      insert: (editor: Editor) => {
+        insertComponentBlock(editor, componentBlocks, key);
+      },
+    })),
+    ...toolbarState.textStyles.allowedHeadingLevels
+      .filter(a => toolbarState.editorDocumentFeatures.formatting.headingLevels.includes(a))
+      .map(level => ({
+        label: `Heading ${level}`,
+        insert(editor: Editor) {
+          insertNodesButReplaceIfSelectionIsAtEmptyParagraphOrHeading(editor, {
+            type: 'heading',
+            level,
+            children: [{ text: '' }],
+          });
+        },
+      })),
     !toolbarState.blockquote.isDisabled &&
       toolbarState.editorDocumentFeatures.formatting.blockTypes.blockquote && {
         label: 'Blockquote',
@@ -241,6 +238,7 @@ export function InsertMenu({ children, text }: { children: ReactNode; text: Text
             display: options.length ? undefined : 'none',
             userSelect: 'none',
             maxHeight: DIALOG_HEIGHT,
+            zIndex: 3,
           }}
           ref={dialog.ref}
         >

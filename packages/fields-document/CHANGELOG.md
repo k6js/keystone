@@ -1,4 +1,21 @@
-# @keystone-next/fields-document
+# @keystone-6/fields-document
+
+## 2.0.0
+
+### Major Changes
+
+- [#7264](https://github.com/keystonejs/keystone/pull/7264) [`c9ec91c8d`](https://github.com/keystonejs/keystone/commit/c9ec91c8d971063169c10e94e93e4626c3d52298) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - The config for relationships in props on component blocks in the document field has moved so that it's configured at the relationship prop rather than in the `relationships` key on the document field config. The `relationships` key in the document field config now exclusively refers to inline relationships.
+
+### Patch Changes
+
+- [#7202](https://github.com/keystonejs/keystone/pull/7202) [`29c6a45fd`](https://github.com/keystonejs/keystone/commit/29c6a45fd5fef8ea27f5d051b4fb5d660492aad5) Thanks [@Noviny](https://github.com/Noviny)! - Fixes a bug where headings would appear in shortcut menu even when they were disabled
+
+* [#7202](https://github.com/keystonejs/keystone/pull/7202) [`29c6a45fd`](https://github.com/keystonejs/keystone/commit/29c6a45fd5fef8ea27f5d051b4fb5d660492aad5) Thanks [@Noviny](https://github.com/Noviny)! - Fixes a bug where the shortcuts menu would clip behind the styles menu - it is now always above the styles menu
+
+* Updated dependencies [[`5d96ee646`](https://github.com/keystonejs/keystone/commit/5d96ee646b3c6342935464763071ad7c3f0a8b43), [`518bd2e43`](https://github.com/keystonejs/keystone/commit/518bd2e437227fbd1a8f7fb947dcb11c57ffb7dd), [`dfb4aea31`](https://github.com/keystonejs/keystone/commit/dfb4aea3112ed83322a698f177545618275699b7), [`3e538d136`](https://github.com/keystonejs/keystone/commit/3e538d1360add48c37a099de7c9d1621e2c74ddf), [`518bd2e43`](https://github.com/keystonejs/keystone/commit/518bd2e437227fbd1a8f7fb947dcb11c57ffb7dd), [`ec8103a12`](https://github.com/keystonejs/keystone/commit/ec8103a12861a7cd182603b82aa3b1133a43da4e), [`81e663d31`](https://github.com/keystonejs/keystone/commit/81e663d3157b3c49a191aaa1bc1c179dd8cc34d4), [`4f3d0a073`](https://github.com/keystonejs/keystone/commit/4f3d0a073dba50f22505af545402a2f1e38afe0d), [`45c2bbaf3`](https://github.com/keystonejs/keystone/commit/45c2bbaf34594e135ccd09f5c9221eb822ac9965), [`6cea02475`](https://github.com/keystonejs/keystone/commit/6cea02475b02528e5f04f0a5bca641367ca1584d)]:
+  - @keystone-ui/fields@6.0.1
+  - @keystone-ui/popover@5.0.1
+  - @keystone-6/core@1.1.0
 
 ## 1.0.1
 
@@ -41,6 +58,8 @@
 - Updated dependencies [[`7dddbe0fd`](https://github.com/keystonejs/keystone/commit/7dddbe0fd5b42a2596ba4dc0bbe1813cb54571c7), [`fb7844ab5`](https://github.com/keystonejs/keystone/commit/fb7844ab50c1d4a6d14b2ad46a568665f6661921), [`3c7a581c1`](https://github.com/keystonejs/keystone/commit/3c7a581c1e53ae49c9f74509de3927ebf2703bde), [`f4554980f`](https://github.com/keystonejs/keystone/commit/f4554980f6243a6545eee6c887d946ff25cd90e3)]:
   - @keystone-6/core@1.0.0
   - @keystone-6/document-renderer@1.0.0
+
+# @keystone-next/fields-document
 
 ## 14.0.0
 
