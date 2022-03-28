@@ -1,5 +1,11 @@
 # @keystone-6/core
 
+## 1.1.0
+
+### Minor Changes
+
+- [#14](https://github.com/k6js/k6js/pull/14) [`7f2e79ead`](https://github.com/k6js/k6js/commit/7f2e79ead14fe908d7a7c8a1f3e3a77dc8ae5941) Thanks [@gautamsi](https://github.com/gautamsi)! - Update with @keystone-6/core@1.1 changes. has breaking changes!
+
 ## 1.0.4
 
 ### Patch Changes
