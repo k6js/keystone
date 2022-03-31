@@ -42,7 +42,15 @@ import { useFilters } from './useFilters';
 import { useSelectedFields } from './useSelectedFields';
 import { useSort } from './useSort';
 
-export { FieldSelection, FilterAdd, FilterList, SortSelection, useFilters, useSelectedFields, useSort };
+export {
+  FieldSelection,
+  FilterAdd,
+  FilterList,
+  SortSelection,
+  useFilters,
+  useSelectedFields,
+  useSort,
+};
 
 export type ListPageHooksProp = Partial<{
   ListPageHeader: FunctionComponent<{ listKey: string }>;
