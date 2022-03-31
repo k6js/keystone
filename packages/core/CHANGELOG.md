@@ -1,5 +1,11 @@
 # @keystone-6/core
 
+## 1.1.1
+
+### Patch Changes
+
+- [#15](https://github.com/k6js/k6js/pull/15) [`21c1da860`](https://github.com/k6js/k6js/commit/21c1da860aa0b1a2b80888fcc9799786c91ace08) Thanks [@pawan123e](https://github.com/pawan123e)! - Export more admin-ui components
+
 ## 1.1.0
 
 ### Minor Changes
