@@ -9,6 +9,8 @@ import {
   useMemo,
   useState,
   FunctionComponent,
+  useCallback,
+  ChangeEvent,
 } from 'react';
 
 import { Button } from '@keystone-ui/button';
@@ -50,6 +52,69 @@ export {
   useFilters,
   useSelectedFields,
   useSort,
+};
+
+export const useShiftSelected = (
+  listData: DeepNullable<{ id: string;[key: string]: any; }[]>,
+  onSelectedItemsChange: (selectedItems: ReadonlySet<string>) => void,
+  selectedItems: ReadonlySet<string>
+) => {
+  const [previousSelected, setPreviousSelected] = useState(null);
+  const [currentSelected, setCurrentSelected] = useState(null);
+
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>, item) => {
+
+      const newSelectedItems = new Set(selectedItems);
+
+      const addOrRemove = (itemId: string, onlyAdd = false) => {
+        if (selectedItems.has(itemId) && !onlyAdd) {
+          newSelectedItems.delete(itemId);
+        } else {
+          newSelectedItems.add(itemId);
+        }
+        onSelectedItemsChange(newSelectedItems);
+      };
+      if(!listData) return;
+      // @ts-ignore shiftKey is defined for click events
+      if (event.nativeEvent.shiftKey && selectedItems.size) {
+        const current = listData.findIndex((x) => x?.id === item);
+        const previous = listData.findIndex((x) => x?.id === previousSelected);
+        const previousCurrent = listData.findIndex(
+          (x) => x?.id === currentSelected
+        );
+        const start = Math.min(current, previous);
+        const end = Math.max(current, previous);
+
+        if (start > -1 && end > -1) {
+          listData.slice(start, end + 1).map((item) => addOrRemove(item?.id || '', true));
+          if (previousCurrent > end) {
+            listData.slice(end + 1, previousCurrent + 1).map((item) => addOrRemove(item?.id || '', true));
+          }
+          if (previousCurrent < start) {
+            listData.slice(previousCurrent, start).map((item) => addOrRemove(item?.id || '', true));
+          }
+          setCurrentSelected(item);
+          return;
+        }
+      } else {
+        setPreviousSelected(item);
+        setCurrentSelected(null);
+      }
+      addOrRemove(item);
+    },
+    [
+      onSelectedItemsChange,
+      selectedItems,
+      listData,
+      previousSelected,
+      setPreviousSelected,
+      currentSelected,
+      setCurrentSelected,
+    ]
+  );
+
+  return onChange;
 };
 
 export type ListPageHooksProp = Partial<{
@@ -672,6 +737,9 @@ function ListTable({
   onSelectedItemsChange(selectedItems: ReadonlySet<string>): void;
   orderableFields: Set<string>;
 }) {
+
+  const onChange = useShiftSelected(itemsGetter.data, onSelectedItemsChange, selectedItems);
+
   const list = useList(listKey);
   const { query } = useRouter();
   const shouldShowLinkIcon =
@@ -767,20 +835,15 @@ function ListTable({
                       minHeight: 38,
                       alignItems: 'center',
                       justifyContent: 'start',
+                      userSelect: 'none'
                     }}
                   >
                     <CheckboxControl
                       size="small"
                       checked={selectedItems.has(itemId)}
                       css={{ cursor: 'default' }}
-                      onChange={() => {
-                        const newSelectedItems = new Set(selectedItems);
-                        if (selectedItems.has(itemId)) {
-                          newSelectedItems.delete(itemId);
-                        } else {
-                          newSelectedItems.add(itemId);
-                        }
-                        onSelectedItemsChange(newSelectedItems);
+                      onChange={(e) => {
+                        onChange(e, itemId);
                       }}
                     />
                   </label>
