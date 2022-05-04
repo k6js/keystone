@@ -2,7 +2,6 @@
 /** @jsx jsx */
 
 import { useCallback, useMemo, useState } from 'react';
-import isDeepEqual from 'fast-deep-equal';
 import { jsx, Box } from '@keystone-ui/core';
 import { FieldContainer, FieldLabel, MultiSelect } from '@keystone-ui/fields';
 import { Drawer } from '@keystone-ui/modals';
@@ -114,18 +113,7 @@ export function UpdateItemsDrawer({
             Object.keys(renderedFields).forEach(fieldPath => {
               const { controller } = list.fields[fieldPath];
               const serialized = controller.serialize(value[fieldPath].value);
-              if (
-                !isDeepEqual(
-                  serialized,
-                  controller.serialize(
-                    controller.deserialize({
-                      [fieldPath]: undefined,
-                    })
-                  )
-                )
-              ) {
-                Object.assign(data, serialized);
-              }
+              Object.assign(data, serialized);
             });
 
             updateItems({
